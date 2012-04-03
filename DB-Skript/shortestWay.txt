@@ -1,0 +1,76 @@
+CREATE TABLE MapImage(
+	Id int(7) unsigned NOT NULL auto_increment PRIMARY KEY,
+	ImgData longblob NOT NULL DEFAULT '',
+	ImgType varchar(50) UNIQUE NOT NULL DEFAULT '',
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated timestamp NOT NULL DEFAULT '0000-00-00'
+)
+ENGINE = INNODB;
+
+
+CREATE TABLE Way(
+	Id int(2) unsigned NOT NULL auto_increment PRIMARY KEY,
+	StartPointX int(7) NOT NULL DEFAULT '0',
+	StartPointY int(7) NOT NULL DEFAULT '0',
+	StartPointName varchar(50) NULL DEFAULT '',
+	EndPointX int(7) NOT NULL DEFAULT '0',
+	EndPointY int(7) NOT NULL DEFAULT '0',
+	EndPointName varchar(50) NULL DEFAULT '',
+	Distance int(7) NOT NULL DEFAULT '0',
+	DistanceUnit int(2) NOT NULL DEFAULT '1',
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated timestamp NOT NULL DEFAULT '0000-00-00'
+)
+ENGINE = INNODB;
+
+
+
+CREATE TABLE RoutingMap(
+	Id int(2) unsigned NOT NULL auto_increment PRIMARY KEY,
+	MapImage int(2) unsigned NOT NULL DEFAULT '1',
+	FOREIGN KEY (MapImage) REFERENCES MapImage(Id),	
+	Description varchar(50) NOT NULL DEFAULT 'Neuer Eintrag',
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated timestamp NOT NULL DEFAULT '0000-00-00'
+)
+ENGINE = INNODB;
+
+
+
+CREATE TABLE DistanceUnit(
+	Id int(2) unsigned NOT NULL auto_increment PRIMARY KEY,
+	Unit varchar(50) NULL DEFAULT 'neue Einheit',
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated timestamp NOT NULL DEFAULT '0000-00-00'
+)
+ENGINE = INNODB;
+
+INSERT INTO DistanceUnit
+	(Id,Unit) 
+VALUES 
+	(1,'cm'),
+	(2,'m'),
+	(3,'km');
+
+
+CREATE TABLE ClassCategory(
+	Id int(2) unsigned NOT NULL auto_increment PRIMARY KEY,
+	Class varchar(25) NULL DEFAULT '',	
+	Description text NOT NULL,	
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated timestamp NOT NULL DEFAULT '0000-00-00'
+)
+ENGINE = INNODB;
+
+INSERT INTO ClassCategory
+	(Id,Class,Description) 
+VALUES 
+	(1,'Hauptstrasse','Test'),
+	(2,'Hauptstrasse','Test'),
+	(3,'Strasse','Test'),
+	(4,'Fahrweg','Test'),
+	(5,'Feldweg','Test'),
+	(6,'Fussweg','Test'),
+	(7,'Autobahn','Test'),
+	(8,'Autostrasse','Test'),
+	(9,'Quartierstrasse','Test');
