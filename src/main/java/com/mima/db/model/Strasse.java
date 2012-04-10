@@ -8,6 +8,10 @@ public class Strasse implements Serializable {
 	private Long startPunktY;
 	private Long endPunktX;
 	private Long endPunktY;
+	private Long startPunktId;
+	private Long endPunktId;
+	private String startPunktName;
+	private String endPunktName;
 	private Long distanz;
 	
 	public Long getStartPunktX() {
@@ -39,6 +43,30 @@ public class Strasse implements Serializable {
 	}
 	public void setDistanz(Long distanz) {
 		this.distanz = distanz;
+	}
+	public Long getStartPunktId() {
+		return startPunktId;
+	}
+	public void setStartPunktId(Long startPunktId) {
+		this.startPunktId = startPunktId;
+	}
+	public Long getEndPunktId() {
+		return endPunktId;
+	}
+	public void setEndPunktId(Long endPunktId) {
+		this.endPunktId = endPunktId;
+	}
+	public String getStartPunktName() {
+		return startPunktName;
+	}
+	public void setStartPunktName(String startPunktName) {
+		this.startPunktName = startPunktName;
+	}
+	public String getEndPunktName() {
+		return endPunktName;
+	}
+	public void setEndPunktName(String endPunktName) {
+		this.endPunktName = endPunktName;
 	}
 	
 	

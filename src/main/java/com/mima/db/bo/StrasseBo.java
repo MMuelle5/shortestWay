@@ -7,5 +7,5 @@ import com.mima.db.model.Strasse;
 
 public interface StrasseBo {
 
-	public List<Strasse> findStreetsByStartPoint(Long startPunktX, Long startPunktY) throws BoException;
+	public List<Strasse> findStreetsByStartPoint(Long startPunktId) throws BoException;
 }

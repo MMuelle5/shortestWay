@@ -12,8 +12,8 @@ public class StrasseBoImpl implements StrasseBo {
 	StrasseDao dao;
 	
 	@Override
-	public List<Strasse> findStreetsByStartPoint(Long startPunktX, Long startPunktY) throws BoException {
-		return dao.findStreetsByStartPoint(startPunktX, startPunktY);
+	public List<Strasse> findStreetsByStartPoint(Long startPunktId) throws BoException {
+		return dao.findStreetsByStartPoint(startPunktId);
 	}
 
 	

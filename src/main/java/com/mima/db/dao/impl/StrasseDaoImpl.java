@@ -16,7 +16,7 @@ import com.mima.db.utils.HibernateDaoHelper;
 
 public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
-	private static final String FINDBYSTARTPOINT = "SELECT startpointX, startpointY, endpointX, endpointY, Distance FROM Way WHERE startpointX = ? AND startpointY=?";
+	private static final String FINDBYSTARTPOINT = "SELECT startpointX, startpointY, endpointX, endpointY, Distance FROM Way WHERE startpointId = ?";
 
 	private DAOFactory daoFactory;
 	
@@ -25,7 +25,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 	}
 
 	@Override
-	public List<Strasse> findStreetsByStartPoint(Long startPunktX, Long startPunktY) {
+	public List<Strasse> findStreetsByStartPoint(Long startPunktId) {
 		
 		List<Strasse> retVal = new ArrayList<Strasse>();
         PreparedStatement preparedStatement = null;
@@ -34,7 +34,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
         try {
 
             Connection connection = daoFactory.getConnection();
-			preparedStatement = DaoUtil.prepareStatement(connection, FINDBYSTARTPOINT, false, new Object[]{startPunktX, startPunktY});
+			preparedStatement = DaoUtil.prepareStatement(connection, FINDBYSTARTPOINT, false, new Object[]{startPunktId});
             resultSet = preparedStatement.executeQuery();
 
 			while(resultSet.next()) {
