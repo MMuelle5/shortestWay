@@ -47,15 +47,24 @@ VALUES
 	(3,'km');
 
 
+CREATE TABLE WayPoint(
+	Id int(7) unsigned NOT NULL auto_increment PRIMARY KEY,
+	XAxis int(7) NOT NULL DEFAULT '0',
+	YAxis int(7) NOT NULL DEFAULT '0',
+	Name varchar(50) NULL DEFAULT '',	
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated timestamp NOT NULL DEFAULT '0000-00-00'
+)
+ENGINE = INNODB;
+
+
 
 CREATE TABLE Way(
-	Id int(2) unsigned NOT NULL auto_increment PRIMARY KEY,
-	StartPointX int(7) NOT NULL DEFAULT '0',
-	StartPointY int(7) NOT NULL DEFAULT '0',
-	StartPointName varchar(50) NULL DEFAULT '',
-	EndPointX int(7) NOT NULL DEFAULT '0',
-	EndPointY int(7) NOT NULL DEFAULT '0',
-	EndPointName varchar(50) NULL DEFAULT '',
+	Id int(7) unsigned NOT NULL auto_increment PRIMARY KEY,
+	StartPoint int(7) unsigned NOT NULL DEFAULT '0',
+	FOREIGN KEY (StartPoint) REFERENCES WayPoint(Id),
+	EndPoint int(7) unsigned NOT NULL DEFAULT '0',
+	FOREIGN KEY (EndPoint) REFERENCES WayPoint(Id),
 	Distance int(7) NOT NULL DEFAULT '0',
 	DistanceUnitId int(2) unsigned NOT NULL DEFAULT '1',
 	FOREIGN KEY (DistanceUnitId) REFERENCES DistanceUnit(Id),
@@ -69,7 +78,7 @@ ENGINE = INNODB;
 
 
 CREATE TABLE RoutingMap(
-	Id int(2) unsigned NOT NULL auto_increment PRIMARY KEY,
+	Id int(7) unsigned NOT NULL auto_increment PRIMARY KEY,
 	MapImageId int(2) unsigned NOT NULL DEFAULT '1',
 	FOREIGN KEY (MapImageId) REFERENCES MapImage(Id),
 	WayId int(2) unsigned NOT NULL DEFAULT '1',
@@ -82,6 +91,7 @@ ENGINE = INNODB;
 
 
 
+
 /* Testdaten abfüllen */
 
 
@@ -90,13 +100,22 @@ INSERT INTO MapImage
 VALUES 
 	(1,1,'jpg');
 
+INSERT INTO WayPoint
+	(Id,XAxis,YAxis,Name) 
+VALUES 
+	(1,1,2,'Startpunkt 1/2'),
+	(2,3,4,'Startpunkt 3/4'),
+	(3,5,6,'Startpunkt 5/6'),
+	(4,7,8,'Startpunkt 7/8');
+
 
 INSERT INTO Way
-	(Id,StartPointX,StartPointY,StartPointName,EndPointX,EndPointY,EndPointName,Distance,DistanceUnitId,ClassCategoryId,Toll) 
+	(Id,StartPoint,EndPoint,Distance,DistanceUnitId,ClassCategoryId,Toll) 
 VALUES 
-	(1,2,3,'Startpunkt 2/3',4,500,'Endpunkt 4/500',10,3,4,0);
+	(1,1,2,10,3,4,0),
+	(2,3,4,15,2,5,0);
 
 INSERT INTO RoutingMap
 	(Id,MapImageId,WayId,Description)
 VALUES 
-	(1,1,1,'Testfall 1');
+	(1,1,1,'Teststrecke 1');
