@@ -9,8 +9,15 @@ import com.mima.db.model.Strasse;
 
 public class StrasseBoImpl implements StrasseBo {
 
-	StrasseDao dao;
+	private StrasseDao dao;
 	
+	public StrasseBoImpl(StrasseDao dao) {
+		super();
+		this.dao = dao;
+	}
+
+
+
 	@Override
 	public List<Strasse> findStreetsByStartPoint(Long startPunktId) throws BoException {
 		return dao.findStreetsByStartPoint(startPunktId);

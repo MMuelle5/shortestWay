@@ -1,6 +1,6 @@
 CREATE TABLE MapImage(
 	Id int(7) unsigned NOT NULL auto_increment PRIMARY KEY,
-	ImgData longblob NOT NULL DEFAULT '',
+	ImgData Longblob NOT NULL DEFAULT '',
 	ImgType varchar(50) UNIQUE NOT NULL DEFAULT '',
 	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated timestamp NOT NULL DEFAULT '0000-00-00'
