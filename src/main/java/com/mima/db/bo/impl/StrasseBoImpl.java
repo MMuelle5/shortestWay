@@ -23,6 +23,13 @@ public class StrasseBoImpl implements StrasseBo {
 		return dao.findStreetsByStartPoint(startPunktId);
 	}
 
+
+
+	@Override
+	public Strasse findStartPointById(Long startPunktId) throws BoException {
+		return dao.findStartPointById(startPunktId);
+	}
+
 	
 
 }

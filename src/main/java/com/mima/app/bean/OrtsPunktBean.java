@@ -1,14 +1,13 @@
-package com.mima.app;
+package com.mima.app.bean;
 
-import java.util.List;
 
-public class OrtsPunktBean {
+public class OrtsPunktBean{
 
 	private Long punkteId;
 	private String punkteBeschreibung;
 	private double distanz;
 	private boolean isKontrolliert;
-	private List<OrtsPunktBean> punkteHistory;
+	private OrtsPunktBean prevPunkt;
 	
 	public Long getPunkteId() {
 		return punkteId;
@@ -28,11 +27,11 @@ public class OrtsPunktBean {
 	public void setDistanz(double distanz) {
 		this.distanz = distanz;
 	}
-	public List<OrtsPunktBean> getPunkteHistory() {
-		return punkteHistory;
+	public OrtsPunktBean getPrevPunkt() {
+		return prevPunkt;
 	}
-	public void setPunkteHistory(List<OrtsPunktBean> punkteHistory) {
-		this.punkteHistory = punkteHistory;
+	public void setPrevPunkt(OrtsPunktBean prevPunkt) {
+		this.prevPunkt = prevPunkt;
 	}
 	public boolean isKontrolliert() {
 		return isKontrolliert;
@@ -40,5 +39,12 @@ public class OrtsPunktBean {
 	public void setKontrolliert(boolean isKontrolliert) {
 		this.isKontrolliert = isKontrolliert;
 	}
-	
+	public String getHistory() {
+		String punkte = this.getPunkteBeschreibung();
+		if(prevPunkt != null) {
+			punkte = this.getPrevPunkt().getHistory()+", "+punkte;
+		}
+		
+		return punkte;
+	}
 }

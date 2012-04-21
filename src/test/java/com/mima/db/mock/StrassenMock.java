@@ -29,7 +29,7 @@ public class StrassenMock implements StrasseDao{
 			s.setEndPunktId(Long.valueOf(3));
 			s.setStartPunktName("A");
 			s.setEndPunktName("C");
-			s.setDistanz(Long.valueOf(3));
+			s.setDistanz(Long.valueOf(4));
 			ret.add(s);
 		}
 		else if(startPunktId==2) {
@@ -135,6 +135,14 @@ public class StrassenMock implements StrasseDao{
 		}
 		
 		return ret;
+	}
+
+	@Override
+	public Strasse findStartPointById(Long startPointId) {
+		Strasse s = new Strasse();
+		s.setStartPunktId(startPointId);
+		s.setStartPunktName("A");
+		return s;
 	}
 
 	

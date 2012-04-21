@@ -54,4 +54,10 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 		return retVal;
 	}
 
+	@Override
+	public Strasse findStartPointById(Long startPointId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
