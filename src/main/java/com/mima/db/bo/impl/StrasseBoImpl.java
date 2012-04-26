@@ -5,6 +5,7 @@ import java.util.List;
 import com.mima.db.bo.StrasseBo;
 import com.mima.db.dao.StrasseDao;
 import com.mima.db.exception.BoException;
+import com.mima.db.model.OrtDTO;
 import com.mima.db.model.Strasse;
 
 public class StrasseBoImpl implements StrasseBo {
@@ -16,18 +17,20 @@ public class StrasseBoImpl implements StrasseBo {
 		this.dao = dao;
 	}
 
-
-
 	@Override
 	public List<Strasse> findStreetsByStartPoint(Long startPunktId) throws BoException {
 		return dao.findStreetsByStartPoint(startPunktId);
 	}
 
-
+	@Override
+	public List<OrtDTO> findAllPointIds() throws BoException {
+		return dao.findAllPoints();
+	}
 
 	@Override
-	public Strasse findStartPointById(Long startPunktId) throws BoException {
-		return dao.findStartPointById(startPunktId);
+	public Strasse findPointByAxis(Long punktX, Long punktY)
+			throws BoException {
+		return dao.findPointByAxis(punktX, punktY);
 	}
 
 	

@@ -11,12 +11,13 @@ import com.mima.db.dao.StrasseDao;
 import com.mima.db.dao.exception.DAOException;
 import com.mima.db.dao.utility.DaoUtil;
 import com.mima.db.daofactory.DAOFactory;
+import com.mima.db.model.OrtDTO;
 import com.mima.db.model.Strasse;
 import com.mima.db.utils.HibernateDaoHelper;
 
 public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
-	private static final String FINDBYSTARTPOINT = "SELECT startpointX, startpointY, endpointX, endpointY, Distance FROM Way WHERE startpointId = ?";
+	private static final String FINDSTREETBYSTARTPOINT = "SELECT startpointX, startpointY, endpointX, endpointY, Distance FROM Way WHERE startpointId = ?";
 
 	private DAOFactory daoFactory;
 	
@@ -34,7 +35,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
         try {
 
             Connection connection = daoFactory.getConnection();
-			preparedStatement = DaoUtil.prepareStatement(connection, FINDBYSTARTPOINT, false, new Object[]{startPunktId});
+			preparedStatement = DaoUtil.prepareStatement(connection, FINDSTREETBYSTARTPOINT, false, new Object[]{startPunktId});
             resultSet = preparedStatement.executeQuery();
 
 			while(resultSet.next()) {
@@ -55,9 +56,14 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 	}
 
 	@Override
-	public Strasse findStartPointById(Long startPointId) {
+	public List<OrtDTO> findAllPoints() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public Strasse findPointByAxis(Long punktX, Long punktY) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

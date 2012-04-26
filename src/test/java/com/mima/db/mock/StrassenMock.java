@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mima.db.dao.StrasseDao;
+import com.mima.db.model.OrtDTO;
 import com.mima.db.model.Strasse;
 
 public class StrassenMock implements StrasseDao{	
@@ -138,11 +139,40 @@ public class StrassenMock implements StrasseDao{
 	}
 
 	@Override
-	public Strasse findStartPointById(Long startPointId) {
-		Strasse s = new Strasse();
-		s.setStartPunktId(startPointId);
-		s.setStartPunktName("A");
-		return s;
+	public List<OrtDTO> findAllPoints() {
+		List<OrtDTO> sl = new ArrayList<OrtDTO>();
+		OrtDTO s = new OrtDTO();
+		s.setPointId((long) 1);
+		s.setDescription("A");
+		sl.add(s);
+		
+		s = new OrtDTO();
+		s.setPointId((long) 2);
+		s.setDescription("B");
+		sl.add(s);
+		
+		s = new OrtDTO();
+		s.setPointId((long) 3);
+		s.setDescription("C");
+		sl.add(s);
+		
+		s = new OrtDTO();
+		s.setPointId((long) 4);
+		s.setDescription("D");
+		sl.add(s);
+
+		s = new OrtDTO();
+		s.setPointId((long) 5);
+		s.setDescription("E");
+		sl.add(s);
+		
+		return sl;
+	}
+
+	@Override
+	public Strasse findPointByAxis(Long punktX, Long punktY) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

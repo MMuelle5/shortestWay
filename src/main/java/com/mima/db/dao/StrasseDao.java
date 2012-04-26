@@ -2,11 +2,14 @@ package com.mima.db.dao;
 
 import java.util.List;
 
+import com.mima.db.model.OrtDTO;
 import com.mima.db.model.Strasse;
 
 public interface StrasseDao {
-	
-	public Strasse findStartPointById(Long startPointId);
-	
-	public List<Strasse> findStreetsByStartPoint(Long startPointId);
+
+	public List<OrtDTO> findAllPoints();
+
+	public List<Strasse> findStreetsByStartPoint(Long startPunktId);
+
+	public Strasse findPointByAxis(Long punktX, Long punktY);
 }
