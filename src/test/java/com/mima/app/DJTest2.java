@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.mima.app.bean.OrtsPunktBean;
 import com.mima.db.bo.impl.StrasseBoImpl;
 import com.mima.db.dao.StrasseDao;
-import com.mima.db.mock.StrassenMock;
+import com.mima.db.mock.StrassenMock2;
 
 
 public class DJTest2 {
