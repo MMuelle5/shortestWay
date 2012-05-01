@@ -79,9 +79,9 @@ public class StrassenMock2 implements StrasseDao{
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(3));
-			s.setEndPunktId(Long.valueOf(2));
+			s.setEndPunktId(Long.valueOf(4));
 			s.setStartPunktName("v2");
-			s.setEndPunktName("v1");
+			s.setEndPunktName("v3");
 			s.setDistanz(Long.valueOf(2));
 			ret.add(s);
 
