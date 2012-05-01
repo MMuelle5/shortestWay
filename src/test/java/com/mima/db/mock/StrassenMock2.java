@@ -70,21 +70,48 @@ public class StrassenMock2 implements StrasseDao{
 		}
 		else if(startPunktId==3) {
 			Strasse s= new Strasse();
+			s.setStartPunktId(Long.valueOf(3));
+			s.setEndPunktId(Long.valueOf(1));
+			s.setStartPunktName("v2");
+			s.setEndPunktName("s");
+			s.setDistanz(Long.valueOf(9));
+			ret.add(s);
+			
+			s= new Strasse();
+			s.setStartPunktId(Long.valueOf(3));
+			s.setEndPunktId(Long.valueOf(2));
+			s.setStartPunktName("v2");
+			s.setEndPunktName("v1");
+			s.setDistanz(Long.valueOf(2));
+			ret.add(s);
+
+			s= new Strasse();
+			s.setStartPunktId(Long.valueOf(3));
+			s.setEndPunktId(Long.valueOf(6));
+			s.setStartPunktName("v2");
+			s.setEndPunktName("v5");
+			s.setDistanz(Long.valueOf(9));
+			ret.add(s);
+			
+		}
+		else if(startPunktId==4) {
+
+			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(1));
 			s.setStartPunktName("v3");
 			s.setEndPunktName("s");
 			s.setDistanz(Long.valueOf(14));
-			ret.add(s);
+			ret.add(s);			
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(2));
 			s.setStartPunktName("v3");
 			s.setEndPunktName("v1");
-			s.setDistanz(Long.valueOf(14));
+			s.setDistanz(Long.valueOf(5));
 			ret.add(s);
-
+			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(3));
@@ -100,33 +127,7 @@ public class StrassenMock2 implements StrasseDao{
 			s.setEndPunktName("v4");
 			s.setDistanz(Long.valueOf(1));
 			ret.add(s);
-			
-		}
-		else if(startPunktId==3) {
-
-			Strasse s= new Strasse();
-			s.setStartPunktId(Long.valueOf(3));
-			s.setEndPunktId(Long.valueOf(1));
-			s.setStartPunktName("v2");
-			s.setEndPunktName("s");
-			s.setDistanz(Long.valueOf(9));
-			ret.add(s);			
-			
-			s= new Strasse();
-			s.setStartPunktId(Long.valueOf(3));
-			s.setEndPunktId(Long.valueOf(4));
-			s.setStartPunktName("v2");
-			s.setEndPunktName("v3");
-			s.setDistanz(Long.valueOf(2));
-			ret.add(s);
-			
-			s= new Strasse();
-			s.setStartPunktId(Long.valueOf(3));
-			s.setEndPunktId(Long.valueOf(6));
-			s.setStartPunktName("v2");
-			s.setEndPunktName("v5");
-			s.setDistanz(Long.valueOf(9));
-			ret.add(s);
+		
 		}
 		else if(startPunktId==5) {
 
