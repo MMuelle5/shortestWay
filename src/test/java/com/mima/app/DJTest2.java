@@ -27,7 +27,7 @@ public class DJTest2 {
 			opb = Dijkstra.run(new Long(1), new Long(6));
 			assertTrue(true);
 			assertEquals(16, opb.getDistanz(), 0);
-			assertEquals("A, D, C, E, F", opb.getHistory());
+			assertEquals("s, v2, v3, v4, v5", opb.getHistory());
 		} catch (Exception e) {
 			e.printStackTrace();
 			assertTrue(false);

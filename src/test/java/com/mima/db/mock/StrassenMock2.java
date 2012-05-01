@@ -112,7 +112,7 @@ public class StrassenMock2 implements StrasseDao{
 			s.setDistanz(Long.valueOf(9));
 			ret.add(s);			
 			
-			Strasse s= new Strasse();
+			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(3));
 			s.setEndPunktId(Long.valueOf(4));
 			s.setStartPunktName("v2");
@@ -138,7 +138,7 @@ public class StrassenMock2 implements StrasseDao{
 			s.setDistanz(Long.valueOf(2));
 			ret.add(s);			
 			
-			Strasse s= new Strasse();
+			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(5));
 			s.setEndPunktId(Long.valueOf(4));
 			s.setStartPunktName("v4");
