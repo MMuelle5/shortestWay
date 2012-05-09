@@ -170,7 +170,7 @@ public class StrassenMock implements StrasseDao{
 	}
 
 	@Override
-	public Strasse findPointByAxis(Long punktX, Long punktY) {
+	public OrtDTO findPointByAxis(Long punktX, Long punktY) {
 		// TODO Auto-generated method stub
 		return null;
 	}

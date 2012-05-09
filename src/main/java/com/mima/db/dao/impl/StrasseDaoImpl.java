@@ -18,6 +18,8 @@ import com.mima.db.utils.HibernateDaoHelper;
 public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
 	private static final String FINDSTREETBYSTARTPOINT = "SELECT startpointX, startpointY, endpointX, endpointY, Distance FROM Way WHERE startpointId = ?";
+	private static final String FINDALLPOINTS = "SELECT id, xAxis, yAxis, name FROM WayPoint";
+	private static final String FINDPOINTBYAXIS = "SELECT id, xAxis, yAxis, name FROM WayPoint WHERE xAxis=? AND yAxis=?";
 
 	private DAOFactory daoFactory;
 	
@@ -57,13 +59,55 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
 	@Override
 	public List<OrtDTO> findAllPoints() {
-		// TODO Auto-generated method stub
-		return null;
+		List<OrtDTO> retVal = new ArrayList<OrtDTO>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+
+            Connection connection = daoFactory.getConnection();
+			preparedStatement = DaoUtil.prepareStatement(connection, FINDALLPOINTS, false, new Object[0]);
+            resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				OrtDTO ort = new OrtDTO();
+				ort.setPointId(resultSet.getLong("id"));
+				ort.setPointX(resultSet.getLong("xAxis"));
+				ort.setPointY(resultSet.getLong("yAxis"));
+				ort.setDescription(resultSet.getString("name"));
+				retVal.add(ort);
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return retVal;
 	}
 
 	@Override
-	public Strasse findPointByAxis(Long punktX, Long punktY) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrtDTO findPointByAxis(Long punktX, Long punktY) {
+		OrtDTO ort = new OrtDTO();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+
+            Connection connection = daoFactory.getConnection();
+			preparedStatement = DaoUtil.prepareStatement(connection, FINDPOINTBYAXIS, false, new Object[]{punktX, punktY});
+            resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				ort.setPointId(resultSet.getLong("id"));
+				ort.setPointX(resultSet.getLong("xAxis"));
+				ort.setPointY(resultSet.getLong("yAxis"));
+				ort.setDescription(resultSet.getString("name"));
+			}
+		} catch (DAOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ort;
 	}
 }

@@ -28,7 +28,7 @@ public class StrasseBoImpl implements StrasseBo {
 	}
 
 	@Override
-	public Strasse findPointByAxis(Long punktX, Long punktY)
+	public OrtDTO findPointByAxis(Long punktX, Long punktY)
 			throws BoException {
 		return dao.findPointByAxis(punktX, punktY);
 	}

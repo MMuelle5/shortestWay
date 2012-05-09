@@ -5,6 +5,7 @@ public class OrtsPunktBean{
 
 	private Long punkteId;
 	private String punkteBeschreibung;
+	private double streckenInklGewichtung;
 	private double distanz;
 	private boolean isKontrolliert;
 	private OrtsPunktBean prevPunkt;
@@ -21,11 +22,11 @@ public class OrtsPunktBean{
 	public void setPunkteBeschreibung(String punkteBeschreibung) {
 		this.punkteBeschreibung = punkteBeschreibung;
 	}
-	public double getDistanz() {
-		return distanz;
+	public double getStreckenInklGewichtung() {
+		return streckenInklGewichtung;
 	}
-	public void setDistanz(double distanz) {
-		this.distanz = distanz;
+	public void setStreckenInklGewichtung(double distanz) {
+		this.streckenInklGewichtung = distanz;
 	}
 	public OrtsPunktBean getPrevPunkt() {
 		return prevPunkt;
@@ -38,6 +39,12 @@ public class OrtsPunktBean{
 	}
 	public void setKontrolliert(boolean isKontrolliert) {
 		this.isKontrolliert = isKontrolliert;
+	}
+	public double getDistanz() {
+		return distanz;
+	}
+	public void setDistanz(double distanz) {
+		this.distanz = distanz;
 	}
 	public String getHistory() {
 		String punkte = this.getPunkteBeschreibung();
