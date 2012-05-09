@@ -26,7 +26,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testPaketStatus() throws DAOException {
-		List<Strasse> retVal = dao.findStreetsByStartPoint(Long.valueOf(2));
+		List<Strasse> retVal = dao.findStreetsByStartPoint(Long.valueOf(1));
 		assertNotNull(retVal);
 		assertTrue(retVal.size()>0);
 	}
