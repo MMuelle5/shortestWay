@@ -7,6 +7,8 @@ public class Strasse implements Serializable {
 	private Long startPunktId;
 	private Long endPunktId;
 	private double distanz;
+	private int speed;
+	private boolean isMaut;
 	
 	public double getDistanz() {
 		return distanz;
@@ -25,6 +27,18 @@ public class Strasse implements Serializable {
 	}
 	public void setEndPunktId(Long endPunktId) {
 		this.endPunktId = endPunktId;
+	}
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public boolean isMaut() {
+		return isMaut;
+	}
+	public void setMaut(boolean isMaut) {
+		this.isMaut = isMaut;
 	}	
 	
 }

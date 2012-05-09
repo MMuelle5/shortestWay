@@ -20,7 +20,7 @@ public class DJTest {
 		StrasseDao str = new StrassenMock();
 		BerechnungsOptionen b = new BerechnungsOptionen();
 		b.setMautAllowed(false);
-		b.setOption(0);
+		b.setOption(BerechnungsOptionen.SHORTESTWAY);
 		Dijkstra dj = new Dijkstra(new StrasseBoImpl(str), b);
 		try {
 			opb = dj.run(new Long(1), new Long(5));
