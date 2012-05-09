@@ -17,7 +17,7 @@ import com.mima.db.utils.HibernateDaoHelper;
 
 public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
-	private static final String FINDSTREETBYSTARTPOINT = "SELECT startpointX, startpointY, endpointX, endpointY, Distance FROM Way WHERE startpointId = ?";
+	private static final String FINDSTREETBYSTARTPOINT = "SELECT StartPoint, EndPoint, Distance FROM Way WHERE StartPoint = ?";
 	private static final String FINDALLPOINTS = "SELECT id, xAxis, yAxis, name FROM WayPoint";
 	private static final String FINDPOINTBYAXIS = "SELECT id, xAxis, yAxis, name FROM WayPoint WHERE xAxis=? AND yAxis=?";
 
@@ -42,10 +42,8 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
 			while(resultSet.next()) {
 				Strasse s = new Strasse();
-				s.setStartPunktX(resultSet.getLong("startpointX"));
-				s.setStartPunktY(resultSet.getLong("startpointY"));
-				s.setEndPunktX(resultSet.getLong("endpointX"));
-				s.setEndPunktY(resultSet.getLong("endpointY"));
+				s.setStartPunktId(resultSet.getLong("StartPoint"));
+				s.setEndPunktId(resultSet.getLong("EndPoint"));
 				s.setDistanz(resultSet.getLong("Distance"));
 				retVal.add(s);
 			}

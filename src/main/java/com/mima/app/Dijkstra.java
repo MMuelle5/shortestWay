@@ -140,8 +140,8 @@ public class Dijkstra {
 //				nextPkt = new OrtsPunktBean();
 				nextPkt.setStreckenInklGewichtung(totalDistanz);
 				nextPkt.setDistanz(aktPktBean.getDistanz()+str.getDistanz());
-				nextPkt.setPunkteBeschreibung(str.getEndPunktName());
-				nextPkt.setPunkteId(str.getEndPunktId());
+//				nextPkt.setPunkteBeschreibung(str.getEndPunktName());
+//				nextPkt.setPunkteId(str.getEndPunktId());
 				nextPkt.setPrevPunkt(aktPktBean);
 //				punkte.put(nextPkt.getPunkteId(), nextPkt);
 			}
