@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 public class GuiRelevantBean {
 
 	private JPanel panel;
+	private JPanel navi;
 	private JLabel startPunkt = new JLabel("Startpunkt: ");
 	private JTextField start = new JTextField();
 	private JLabel endPunkt = new JLabel("Endpunkt: ");
@@ -21,6 +22,14 @@ public class GuiRelevantBean {
 		super();
 		option.addItem(BerechnungsOptionen.SHORTESTWAY);
 		option.addItem(BerechnungsOptionen.FASTESTWAY);
+	}
+
+	public JPanel getNavi() {
+		return navi;
+	}
+
+	public void setNavi(JPanel navi) {
+		this.navi = navi;
 	}
 
 	public JPanel getPanel() {
