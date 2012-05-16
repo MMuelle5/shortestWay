@@ -4,40 +4,12 @@ import java.io.Serializable;
 
 public class Strasse implements Serializable {
 
-	private Long startPunktX;
-	private Long startPunktY;
-	private Long endPunktX;
-	private Long endPunktY;
 	private Long startPunktId;
 	private Long endPunktId;
-	private String startPunktName;
-	private String endPunktName;
 	private double distanz;
+	private int speed;
+	private boolean isMaut;
 	
-	public Long getStartPunktX() {
-		return startPunktX;
-	}
-	public void setStartPunktX(Long startPunktX) {
-		this.startPunktX = startPunktX;
-	}
-	public Long getStartPunktY() {
-		return startPunktY;
-	}
-	public void setStartPunktY(Long startPunktY) {
-		this.startPunktY = startPunktY;
-	}
-	public Long getEndPunktX() {
-		return endPunktX;
-	}
-	public void setEndPunktX(Long endPunktX) {
-		this.endPunktX = endPunktX;
-	}
-	public Long getEndPunktY() {
-		return endPunktY;
-	}
-	public void setEndPunktY(Long endPunktY) {
-		this.endPunktY = endPunktY;
-	}
 	public double getDistanz() {
 		return distanz;
 	}
@@ -56,18 +28,17 @@ public class Strasse implements Serializable {
 	public void setEndPunktId(Long endPunktId) {
 		this.endPunktId = endPunktId;
 	}
-	public String getStartPunktName() {
-		return startPunktName;
+	public int getSpeed() {
+		return speed;
 	}
-	public void setStartPunktName(String startPunktName) {
-		this.startPunktName = startPunktName;
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
-	public String getEndPunktName() {
-		return endPunktName;
+	public boolean isMaut() {
+		return isMaut;
 	}
-	public void setEndPunktName(String endPunktName) {
-		this.endPunktName = endPunktName;
-	}
-	
+	public void setMaut(boolean isMaut) {
+		this.isMaut = isMaut;
+	}	
 	
 }

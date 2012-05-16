@@ -12,6 +12,6 @@ public interface StrasseBo {
 	
 	public List<OrtDTO> findAllPointIds() throws BoException;
 
-	public Strasse findPointByAxis(Long endPunktX, Long endPunktY) throws BoException;
+	public OrtDTO findPointByAxis(Long endPunktX, Long endPunktY) throws BoException;
 
 }

@@ -20,24 +20,24 @@ public class StrassenMock02 implements StrasseDao{
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(1));
 			s.setEndPunktId(Long.valueOf(2));
-			s.setStartPunktName("s");
-			s.setEndPunktName("v1");
+//			s.setStartPunktName("s");
+//			s.setEndPunktName("v1");
 			s.setDistanz(Long.valueOf(11));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(1));
 			s.setEndPunktId(Long.valueOf(3));
-			s.setStartPunktName("s");
-			s.setEndPunktName("v2");
+//			s.setStartPunktName("s");
+//			s.setEndPunktName("v2");
 			s.setDistanz(Long.valueOf(9));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(1));
 			s.setEndPunktId(Long.valueOf(4));
-			s.setStartPunktName("s");
-			s.setEndPunktName("v3");
+//			s.setStartPunktName("s");
+//			s.setEndPunktName("v3");
 			s.setDistanz(Long.valueOf(14));
 			ret.add(s);
 
@@ -46,24 +46,24 @@ public class StrassenMock02 implements StrasseDao{
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(2));
 			s.setEndPunktId(Long.valueOf(1));
-			s.setStartPunktName("v1");
-			s.setEndPunktName("s");
+//			s.setStartPunktName("v1");
+//			s.setEndPunktName("s");
 			s.setDistanz(Long.valueOf(11));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(2));
 			s.setEndPunktId(Long.valueOf(4));
-			s.setStartPunktName("v1");
-			s.setEndPunktName("v3");
+//			s.setStartPunktName("v1");
+//			s.setEndPunktName("v3");
 			s.setDistanz(Long.valueOf(5));
 			ret.add(s);
 
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(2));
 			s.setEndPunktId(Long.valueOf(5));
-			s.setStartPunktName("v1");
-			s.setEndPunktName("v4");
+//			s.setStartPunktName("v1");
+//			s.setEndPunktName("v4");
 			s.setDistanz(Long.valueOf(2));
 			ret.add(s);
 			
@@ -72,24 +72,24 @@ public class StrassenMock02 implements StrasseDao{
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(3));
 			s.setEndPunktId(Long.valueOf(1));
-			s.setStartPunktName("v2");
-			s.setEndPunktName("s");
+//			s.setStartPunktName("v2");
+//			s.setEndPunktName("s");
 			s.setDistanz(Long.valueOf(9));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(3));
 			s.setEndPunktId(Long.valueOf(4));
-			s.setStartPunktName("v2");
-			s.setEndPunktName("v3");
+//			s.setStartPunktName("v2");
+//			s.setEndPunktName("v3");
 			s.setDistanz(Long.valueOf(2));
 			ret.add(s);
 
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(3));
 			s.setEndPunktId(Long.valueOf(6));
-			s.setStartPunktName("v2");
-			s.setEndPunktName("v5");
+//			s.setStartPunktName("v2");
+//			s.setEndPunktName("v5");
 			s.setDistanz(Long.valueOf(9));
 			ret.add(s);
 			
@@ -99,32 +99,32 @@ public class StrassenMock02 implements StrasseDao{
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(1));
-			s.setStartPunktName("v3");
-			s.setEndPunktName("s");
+//			s.setStartPunktName("v3");
+//			s.setEndPunktName("s");
 			s.setDistanz(Long.valueOf(14));
 			ret.add(s);			
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(2));
-			s.setStartPunktName("v3");
-			s.setEndPunktName("v1");
+//			s.setStartPunktName("v3");
+//			s.setEndPunktName("v1");
 			s.setDistanz(Long.valueOf(5));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(3));
-			s.setStartPunktName("v3");
-			s.setEndPunktName("v2");
+//			s.setStartPunktName("v3");
+//			s.setEndPunktName("v2");
 			s.setDistanz(Long.valueOf(2));
 			ret.add(s);
 
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(5));
-			s.setStartPunktName("v3");
-			s.setEndPunktName("v4");
+//			s.setStartPunktName("v3");
+//			s.setEndPunktName("v4");
 			s.setDistanz(Long.valueOf(1));
 			ret.add(s);
 		
@@ -134,24 +134,24 @@ public class StrassenMock02 implements StrasseDao{
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(5));
 			s.setEndPunktId(Long.valueOf(2));
-			s.setStartPunktName("v4");
-			s.setEndPunktName("v1");
+//			s.setStartPunktName("v4");
+//			s.setEndPunktName("v1");
 			s.setDistanz(Long.valueOf(2));
 			ret.add(s);			
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(5));
 			s.setEndPunktId(Long.valueOf(4));
-			s.setStartPunktName("v4");
-			s.setEndPunktName("v3");
+//			s.setStartPunktName("v4");
+//			s.setEndPunktName("v3");
 			s.setDistanz(Long.valueOf(1));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(5));
 			s.setEndPunktId(Long.valueOf(6));
-			s.setStartPunktName("v4");
-			s.setEndPunktName("v5");
+//			s.setStartPunktName("v4");
+//			s.setEndPunktName("v5");
 			s.setDistanz(Long.valueOf(4));
 			ret.add(s);
 		}
@@ -161,16 +161,16 @@ public class StrassenMock02 implements StrasseDao{
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(6));
 			s.setEndPunktId(Long.valueOf(3));
-			s.setStartPunktName("v5");
-			s.setEndPunktName("v2");
+//			s.setStartPunktName("v5");
+//			s.setEndPunktName("v2");
 			s.setDistanz(Long.valueOf(9));
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(6));
 			s.setEndPunktId(Long.valueOf(5));
-			s.setStartPunktName("v5");
-			s.setEndPunktName("v4");
+//			s.setStartPunktName("v5");
+//			s.setEndPunktName("v4");
 			s.setDistanz(Long.valueOf(4));
 			ret.add(s);
 
@@ -216,7 +216,7 @@ public class StrassenMock02 implements StrasseDao{
 	}
 
 	@Override
-	public Strasse findPointByAxis(Long punktX, Long punktY) {
+	public OrtDTO findPointByAxis(Long punktX, Long punktY) {
 		// TODO Auto-generated method stub
 		return null;
 	}

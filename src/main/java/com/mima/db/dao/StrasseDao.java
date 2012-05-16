@@ -11,5 +11,5 @@ public interface StrasseDao {
 
 	public List<Strasse> findStreetsByStartPoint(Long startPunktId);
 
-	public Strasse findPointByAxis(Long punktX, Long punktY);
+	public OrtDTO findPointByAxis(Long punktX, Long punktY);
 }
