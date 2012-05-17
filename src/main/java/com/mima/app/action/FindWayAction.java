@@ -18,7 +18,7 @@ import com.mima.app.bean.OrtsPunktBean;
 import com.mima.db.bo.impl.StrasseBoImpl;
 import com.mima.db.dao.StrasseDao;
 import com.mima.db.exception.BoException;
-import com.mima.db.mock.StrassenMock;
+import com.mima.db.mock.StrassenMock01;
 
 public class FindWayAction implements ActionListener {
 
@@ -37,7 +37,7 @@ public class FindWayAction implements ActionListener {
 		calc.setMautAllowed(bean.getMaut().isSelected());
 		calc.setOption(String.valueOf(bean.getOption().getSelectedItem()));
 		
-		StrasseDao dao = new StrassenMock();
+		StrasseDao dao = new StrassenMock01();
 		Dijkstra dj = new Dijkstra(new StrasseBoImpl(dao), calc);
 		JPanel center = new JPanel(new GridBagLayout());
 		center.setBorder(new EmptyBorder(3, 3, 3, 3));

@@ -12,22 +12,12 @@ import com.mima.db.dao.StrasseDao;
 import com.mima.db.mock.StrassenMock02;
 
 
-<<<<<<< HEAD:src/test/java/com/mima/app/DJTest02.java
 public class DJTest02 {
-
-	@Before
-	public void init() {
-		StrasseDao str = new StrassenMock02();
-		Dijkstra.init(new StrasseBoImpl(str));
-	}
-=======
-public class DJTest2 {
->>>>>>> 4e2066d466ff4288ebfdce7547ad4612148a99cf:src/test/java/com/mima/app/DJTest2.java
 	
 	@Test
 	public void testDJ02() {
 		OrtsPunktBean opb;
-		StrasseDao str = new StrassenMock2();
+		StrasseDao str = new StrassenMock02();
 		BerechnungsOptionen b = new BerechnungsOptionen();
 		b.setMautAllowed(false);
 		b.setOption(BerechnungsOptionen.SHORTESTWAY);
