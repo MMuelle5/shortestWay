@@ -56,7 +56,7 @@ public class StrassenMock03 implements StrasseDao{
 			ret.add(s);
 			
 		}
-		else if(startPunktId==4) {
+		else {
 
 			Strasse s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
