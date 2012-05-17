@@ -7,11 +7,13 @@ import com.mima.db.dao.StrasseDao;
 import com.mima.db.model.OrtDTO;
 import com.mima.db.model.Strasse;
 
-public class StrassenMock03 implements StrasseDao{	
+public class StrassenMock04 implements StrasseDao{	
 	
 	@Override
 	public List<Strasse> findStreetsByStartPoint(Long startPunktId) {
-				
+		
+		
+		
 		List<Strasse> ret = new ArrayList<Strasse>();
 		
 		if(startPunktId ==1){
