@@ -37,14 +37,13 @@ public class Dijkstra {
 		return run(start.getPointId(), end.getPointId());
 	}
 	
-	/*
+	/**
 	 * Startpunkt gegeben aktPkt = Startpunkt while(aktPkt != endPkt)
 	 * alleVerbindungen holen akt pkt als "vorbei gekommen" markieren neu
 	 * erhaltene Pkte mit distanz abfüllen neue Pkt bereits abgefüllt? ja:
 	 * kleiner? ja: pkt als neuen aktPkt nehmen nein: kleinster pkt als aktPkt
 	 * nehmen nein: kleinster pkt als aktPkt nehmen
 	 */
-
 	public OrtsPunktBean run(Long startPunktId, Long endPunktId) throws BoException {
 
 		// init 1. Bean
@@ -58,6 +57,8 @@ public class Dijkstra {
 			pktBean.setPunkteId(str.getPointId());
 			pktBean.setPunkteBeschreibung(str.getDescription());
 			pktBean.setStreckenInklGewichtung(DEFAULTDISTANZ);
+			pktBean.setPointX(str.getPointX());
+			pktBean.setPointY(str.getPointY());
 			
 			if(str.getPointId() == startPunktId || str.getPointId().equals(startPunktId)) {
 				pktBean.setStreckenInklGewichtung(0);

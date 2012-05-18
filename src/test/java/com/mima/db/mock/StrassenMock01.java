@@ -143,26 +143,36 @@ public class StrassenMock01 implements StrasseDao{
 		List<OrtDTO> sl = new ArrayList<OrtDTO>();
 		OrtDTO s = new OrtDTO();
 		s.setPointId((long) 1);
+		s.setPointX(20);
+		s.setPointY(20);
 		s.setDescription("A");
 		sl.add(s);
 		
 		s = new OrtDTO();
 		s.setPointId((long) 2);
+		s.setPointX(20);
+		s.setPointY(10);
 		s.setDescription("B");
 		sl.add(s);
 		
 		s = new OrtDTO();
 		s.setPointId((long) 3);
+		s.setPointX(40);
+		s.setPointY(20);
 		s.setDescription("C");
 		sl.add(s);
 		
 		s = new OrtDTO();
 		s.setPointId((long) 4);
+		s.setPointX(80);
+		s.setPointY(10);
 		s.setDescription("D");
 		sl.add(s);
 
 		s = new OrtDTO();
 		s.setPointId((long) 5);
+		s.setPointX(90);
+		s.setPointY(90);
 		s.setDescription("E");
 		sl.add(s);
 		

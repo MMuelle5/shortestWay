@@ -11,6 +11,8 @@ public class OrtsPunktBean{
 	private double streckenInklGewichtung;
 	private double distanz;
 	private boolean isKontrolliert;
+	private long pointX;
+	private long pointY;
 	private OrtsPunktBean prevPunkt;
 	
 	public Long getPunkteId() {
@@ -48,6 +50,18 @@ public class OrtsPunktBean{
 	}
 	public void setDistanz(double distanz) {
 		this.distanz = distanz;
+	}
+	public long getPointX() {
+		return pointX;
+	}
+	public void setPointX(long pointX) {
+		this.pointX = pointX;
+	}
+	public long getPointY() {
+		return pointY;
+	}
+	public void setPointY(long pointY) {
+		this.pointY = pointY;
 	}
 	public List<OrtsPunktBean> getWay() {
 		List<OrtsPunktBean> opb = new ArrayList<OrtsPunktBean>();

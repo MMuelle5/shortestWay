@@ -15,7 +15,6 @@ public class DisplayWay {
 	private JFrame frame;
 	private GuiRelevantBean bean = new GuiRelevantBean();
 	private FindWayAction action;
-	private JPanel navigation;
 	
 	public DisplayWay() {
 		super();

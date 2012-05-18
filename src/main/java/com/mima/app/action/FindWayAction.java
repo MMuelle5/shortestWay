@@ -44,27 +44,44 @@ public class FindWayAction implements ActionListener {
 		
 		GridBagConstraints gc = new GridBagConstraints();
 		gc.fill = GridBagConstraints.HORIZONTAL;
-//		gc.weightx = 0.5;
 		gc.gridx = 0;
 		gc.gridy = 0;
 		try {
 			OrtsPunktBean opb = dj.run(Long.valueOf(bean.getStart().getText()), Long.valueOf(bean.getEnde().getText()));
-//			String[] weg = opb.getHistory().split(", ");
-//			for(int i = 0; i < weg.length; i++) {
-//				gc.gridy=i;
-//				center.add(new JLabel(weg[i]), gc);
-//			}
-			int gridY = 0;
+			
 			String ausgabe = null;
+			double steigungA = 0;
+			double steigungB = 0;
+			double km;
 			for(int i = opb.getWay().size()-1; i >=0; i--) {
-				gc.gridy=gridY;
+				steigungB = steigungA;
+
 				if(opb.getWay().get(i).getPrevPunkt() != null) {
-					ausgabe = "Strecke von "+opb.getWay().get(i).getPrevPunkt().getPunkteBeschreibung()+" in Richtung "+opb.getWay().get(i).getPunkteBeschreibung()
-							+" "+(opb.getWay().get(i).getDistanz()-opb.getWay().get(i).getPrevPunkt().getDistanz()+ " km folgen");
+					km = opb.getWay().get(i).getDistanz()-opb.getWay().get(i).getPrevPunkt().getDistanz();
+					
+					if(i == opb.getWay().size()-2) {
+						ausgabe = "Strecke von "+opb.getWay().get(i).getPrevPunkt().getPunkteBeschreibung()+" in Richtung "+opb.getWay().get(i).getPunkteBeschreibung()
+								+" "+km+ " km folgen";
+					}
+					else{
+						steigungA = (opb.getWay().get(i).getPointY()-opb.getWay().get(i).getPrevPunkt().getPointY())/(opb.getWay().get(i).getPointX()-opb.getWay().get(i).getPrevPunkt().getPointX());
+						
+						double diff = steigungA - steigungB;
+						if(diff < 0.1 && diff > -0.1) {
+							ausgabe = "Dem Streckenverlauf "+ km +" km in Richtung "+opb.getWay().get(i).getPunkteBeschreibung() +" folgen";
+						}
+						else if(diff >= 0.1) {
+							ausgabe = "Links in Richtung "+ opb.getWay().get(i).getPunkteBeschreibung()+" abbiegen und  "+ km +" km dem Streckenverlauf folgen";
+						}
+						else {
+							ausgabe = "Rechts abbiegen "+ opb.getWay().get(i).getPunkteBeschreibung()+" abbiegen und  "+ km +" km dem Streckenverlauf folgen";
+						}
+					}
 				}
 				
 				center.add(new JLabel(ausgabe), gc);
-				gridY++;
+				gc.gridy++;
+				
 			}
 			gc.gridy++;
 			center.add(new JLabel("Sie haben "+opb.getPunkteBeschreibung()+" nach "+opb.getDistanz()+"km erreicht."), gc);

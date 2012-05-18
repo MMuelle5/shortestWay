@@ -3,8 +3,8 @@ package com.mima.db.model;
 public class OrtDTO {
 
 	private Long pointId;
-	private Long pointX;
-	private Long pointY;
+	private long pointX;
+	private long pointY;
 	private String description;
 	
 	public Long getPointId() {
@@ -13,16 +13,16 @@ public class OrtDTO {
 	public void setPointId(Long pointId) {
 		this.pointId = pointId;
 	}
-	public Long getPointX() {
+	public long getPointX() {
 		return pointX;
 	}
-	public void setPointX(Long pointX) {
+	public void setPointX(long pointX) {
 		this.pointX = pointX;
 	}
-	public Long getPointY() {
+	public long getPointY() {
 		return pointY;
 	}
-	public void setPointY(Long pointY) {
+	public void setPointY(long pointY) {
 		this.pointY = pointY;
 	}
 	public String getDescription() {
