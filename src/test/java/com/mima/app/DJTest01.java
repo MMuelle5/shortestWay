@@ -14,9 +14,9 @@ import com.mima.db.mock.StrassenMock01;
 
 
 public class DJTest01 {
-	
+
 	@Test
-	public void testDJ01() {
+	public void ausgabeTest() {
 		OrtsPunktBean opb;
 		StrasseDao str = new StrassenMock01();
 		BerechnungsOptionen b = new BerechnungsOptionen();

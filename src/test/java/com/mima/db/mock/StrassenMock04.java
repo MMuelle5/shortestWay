@@ -21,12 +21,14 @@ public class StrassenMock04 implements StrasseDao{
 			s.setStartPunktId(Long.valueOf(1));
 			s.setEndPunktId(Long.valueOf(2));
 			s.setDistanz(Long.valueOf(10));
+			s.setSpeed(80);
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(1));
 			s.setEndPunktId(Long.valueOf(3));
 			s.setDistanz(Long.valueOf(9));
+			s.setSpeed(40);
 			ret.add(s);
 			
 		}
@@ -35,12 +37,14 @@ public class StrassenMock04 implements StrasseDao{
 			s.setStartPunktId(Long.valueOf(2));
 			s.setEndPunktId(Long.valueOf(1));
 			s.setDistanz(Long.valueOf(10));
+			s.setSpeed(80);
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(2));
 			s.setEndPunktId(Long.valueOf(4));
 			s.setDistanz(Long.valueOf(10));
+			s.setSpeed(120);
 			ret.add(s);
 			
 		}
@@ -49,12 +53,14 @@ public class StrassenMock04 implements StrasseDao{
 			s.setStartPunktId(Long.valueOf(3));
 			s.setEndPunktId(Long.valueOf(1));
 			s.setDistanz(Long.valueOf(9));
+			s.setSpeed(40);
 			ret.add(s);
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(3));
 			s.setEndPunktId(Long.valueOf(4));
 			s.setDistanz(Long.valueOf(10));
+			s.setSpeed(50);
 			ret.add(s);
 			
 		}
@@ -64,12 +70,14 @@ public class StrassenMock04 implements StrasseDao{
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(2));
 			s.setDistanz(Long.valueOf(10));
+			s.setSpeed(120);
 			ret.add(s);			
 			
 			s= new Strasse();
 			s.setStartPunktId(Long.valueOf(4));
 			s.setEndPunktId(Long.valueOf(3));
 			s.setDistanz(Long.valueOf(10));
+			s.setSpeed(50);
 			ret.add(s);	
 		
 		}

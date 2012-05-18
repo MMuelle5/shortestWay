@@ -25,7 +25,7 @@ public class DJTest04 {
 		try {
 			opb = dj.run(new Long(1), new Long(4));
 			assertTrue(true);
-			assertEquals(20, opb.getStreckenInklGewichtung(), 0);
+			assertEquals(20, opb.getDistanz(), 0);
 			assertEquals("A, B, D", opb.getHistory());
 		} catch (Exception e) {
 			e.printStackTrace();

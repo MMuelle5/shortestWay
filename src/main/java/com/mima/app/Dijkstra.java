@@ -70,6 +70,9 @@ public class Dijkstra {
 		aktPktBean.setStreckenInklGewichtung(DEFAULTDISTANZ);
 		Long aktPkt;
 		OrtsPunktBean pkt;
+		OrtsPunktBean shortest = new OrtsPunktBean();
+		shortest.setStreckenInklGewichtung(DEFAULTDISTANZ);
+		boolean hasNewPoint = false;
 
 		while(allePunkte.size() != 0) {
 
@@ -81,9 +84,14 @@ public class Dijkstra {
 				} else if(aktPktBean.getStreckenInklGewichtung() > pkt.getStreckenInklGewichtung()){
 					aktPktBean = pkt;
 					aktPktBean.setKontrolliert(true);
+					hasNewPoint = true;
 					allePunkte.remove(i);
 				}
 			}
+			if(!hasNewPoint) {
+				return shortest;
+			}
+			hasNewPoint = false;
 			aktPkt = aktPktBean.getPunkteId();
 				
 			while (aktPkt != endPunktId && !aktPkt.equals(endPunktId)) {
@@ -100,6 +108,9 @@ public class Dijkstra {
 					break;
 				}
 			}
+			if(shortest.getStreckenInklGewichtung() > aktPktBean.getStreckenInklGewichtung()) {
+				shortest = aktPktBean;
+			}
 		}
 
 //		Testfall-Ausgabe
@@ -109,7 +120,7 @@ public class Dijkstra {
 //			System.out.println(punkte.get(new Long(i)).getHistory());
 //		}
 		
-		return aktPktBean;
+		return shortest;
 	}
 
 	/**
