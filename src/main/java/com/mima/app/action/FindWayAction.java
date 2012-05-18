@@ -1,6 +1,5 @@
 package com.mima.app.action;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -39,6 +38,8 @@ public class FindWayAction implements ActionListener {
 		
 		StrasseDao dao = new StrassenMock01();
 		Dijkstra dj = new Dijkstra(new StrasseBoImpl(dao), calc);
+		JFrame f = new JFrame("Streckenbeschreib von "+ bean.getStart().getText() +" nach "+bean.getEnde().getText());
+		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel center = new JPanel(new GridBagLayout());
 		center.setBorder(new EmptyBorder(3, 3, 3, 3));
 		
@@ -84,10 +85,13 @@ public class FindWayAction implements ActionListener {
 				
 			}
 			gc.gridy++;
+			f.add(center);
+			f.pack();
+			f.setVisible(true);
 			center.add(new JLabel("Sie haben "+opb.getPunkteBeschreibung()+" nach "+opb.getDistanz()+"km erreicht."), gc);
-			frame.add(bean.getNavi(), BorderLayout.EAST);
-			frame.add(center, BorderLayout.CENTER);
-			frame.pack();
+//			frame.add(bean.getNavi(), BorderLayout.EAST);
+//			frame.add(center, BorderLayout.CENTER);
+//			frame.pack();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (BoException e) {

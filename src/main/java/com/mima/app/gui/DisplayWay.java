@@ -18,7 +18,7 @@ public class DisplayWay {
 	
 	public DisplayWay() {
 		super();
-		frame = new JFrame();
+		frame = new JFrame("Routensucher");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		bean.setNavi(new JPanel(new GridBagLayout()));
 		action = new FindWayAction(bean, frame);
@@ -29,10 +29,17 @@ public class DisplayWay {
 		DisplayEast.getNavigation(bean, action);
 		
 		bean.setPanel(new JPanel(new BorderLayout()));
+
+		GraphicalComponents gc = new GraphicalComponents(frame);
+		
+		bean.getPanel().add(gc, BorderLayout.CENTER);
 		
 		bean.getPanel().add(bean.getNavi(), BorderLayout.EAST);
+		
+
+		
 		frame.add(bean.getPanel());
-		frame.setPreferredSize(new Dimension(600,400));
+		frame.setPreferredSize(new Dimension(800,800));
 		frame.pack();
 		frame.setVisible(true);
 	}
