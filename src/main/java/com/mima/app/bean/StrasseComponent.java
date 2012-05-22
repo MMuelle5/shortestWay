@@ -19,6 +19,8 @@ public class StrasseComponent {
 		this.yEnd = yEnd;
 		this.distanz = distanz;
 	}
+	public StrasseComponent() {
+	}
 	public int getxStart() {
 		return xStart;
 	}

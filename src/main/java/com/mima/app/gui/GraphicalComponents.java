@@ -25,13 +25,13 @@ public class GraphicalComponents extends JPanel {
 	private List<StrasseComponent> strassen = new ArrayList<StrasseComponent>();
 	private PaintBean pb = new PaintBean();
 	private PaintAction pa;
+	private boolean isMousePressed = false;
 
 	public GraphicalComponents(JFrame frame) {
 		super();
 		pmenu.add(newPoint);
 		pmenu.add(newStreet);
 		pmenu.add(delete);
-		System.out.println("hmm");
 
 		int xAxisStart = 100;
 		int yAxisStart = 50;
@@ -51,11 +51,7 @@ public class GraphicalComponents extends JPanel {
 		newPoint.addActionListener(pa);
 		newStreet.addActionListener(pa);
 		delete.addActionListener(pa);
-	}
 
-	public void paintComponent(Graphics g) {
-
-		System.out.println("uff");
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent me) {
 				if (me.isPopupTrigger()) {
@@ -69,10 +65,29 @@ public class GraphicalComponents extends JPanel {
 						e1.printStackTrace();
 					}
 				}
+				else if(isMousePressed) {
+					System.out.println("wech");
+					isMousePressed = false;
+					pb.setxAxisEnd(me.getX());
+					pb.setyAxisEnd(me.getY());
+					pa.actionPerformed(null);
+				}
+				
+			}
+			public void mousePressed(MouseEvent me) {
+				if (!me.isPopupTrigger()) {
+					System.out.println("wusch");
+					isMousePressed = true;
+					pb.setxAxis(me.getX());
+					pb.setyAxis(me.getY());
+				}
 			}
 		});
 
-		System.out.println("ok");
+	}
+
+	public void paintComponent(Graphics g) {
+
 		for (StrasseComponent c : strassen) {
 			if (c.getxEnd() != 0) {
 				GraphicalUtils.drawLine(g, c.getxStart(), c.getyStart(),
