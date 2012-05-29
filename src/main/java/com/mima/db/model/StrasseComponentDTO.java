@@ -1,16 +1,18 @@
-package com.mima.app.bean;
+package com.mima.db.model;
 
-public class StrasseComponent {
+public class StrasseComponentDTO {
 
 	private int xStart;
 	private int yStart;
+	private Long startId;
 	private int xEnd;
 	private int yEnd;
+	private Long endId;
 	private double distanz;
 	private int speed;
 	private boolean isMaut;
 	
-	public StrasseComponent(int xStart, int yStart, int xEnd, int yEnd,
+	public StrasseComponentDTO(int xStart, int yStart, int xEnd, int yEnd,
 			double distanz) {
 		super();
 		this.xStart = xStart;
@@ -19,7 +21,7 @@ public class StrasseComponent {
 		this.yEnd = yEnd;
 		this.distanz = distanz;
 	}
-	public StrasseComponent() {
+	public StrasseComponentDTO() {
 	}
 	public int getxStart() {
 		return xStart;
@@ -45,6 +47,18 @@ public class StrasseComponent {
 	public void setyEnd(int yEnd) {
 		this.yEnd = yEnd;
 	}
+	public Long getStartId() {
+		return startId;
+	}
+	public void setStartId(Long startId) {
+		this.startId = startId;
+	}
+	public Long getEndId() {
+		return endId;
+	}
+	public void setEndId(Long endId) {
+		this.endId = endId;
+	}
 	public double getDistanz() {
 		return distanz;
 	}
@@ -63,4 +77,24 @@ public class StrasseComponent {
 	public void setMaut(boolean isMaut) {
 		this.isMaut = isMaut;
 	}
+	
+	public void incSpeed() {
+		if(speed == 50) {
+			speed = 80;
+		}
+		else if(speed == 80) {
+			speed = 120;
+		}
+		else if(speed == 120) {
+			speed = 0;
+		}
+		else {
+			speed =50;
+		}
+	}
+	
+	public int hashCode() {
+		return (int) (startId+endId);
+	}
+	
 }

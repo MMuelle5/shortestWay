@@ -2,7 +2,7 @@ package com.mima.db.model;
 
 import java.io.Serializable;
 
-public class Strasse implements Serializable {
+public class StrasseDTO implements Serializable {
 
 	private Long startPunktId;
 	private Long endPunktId;

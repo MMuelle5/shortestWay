@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.mima.db.dao.exception.DAOException;
-
 class DriverManagerDAOFactory extends DAOFactory {
     private String url;
     private String username;
@@ -17,14 +15,10 @@ class DriverManagerDAOFactory extends DAOFactory {
         this.password = password;
     }
 
-    public Connection getConnection() throws DAOException {
+    public Connection getConnection() throws SQLException {
         Connection con = null;
         
-        	try {
-				con = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				throw new DAOException("Connection failed", e);
-			}
+		con = DriverManager.getConnection(url, username, password);
 		
         
         return con;

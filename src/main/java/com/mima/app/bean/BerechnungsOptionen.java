@@ -1,6 +1,6 @@
 package com.mima.app.bean;
 
-import com.mima.db.model.Strasse;
+import com.mima.db.model.StrasseDTO;
 
 /**
  * Verschieden berechnungs-Attribute koennen angegeben werden:
@@ -32,7 +32,7 @@ public class BerechnungsOptionen {
 		this.option = option;
 	}
 	
-	public double calcDistanzInklGew(double aktDistInklGew, Strasse add) {
+	public double calcDistanzInklGew(double aktDistInklGew, StrasseDTO add) {
 		
 		double newDistanz = 0;
 		if(BerechnungsOptionen.SHORTESTWAY.equals(option)) {

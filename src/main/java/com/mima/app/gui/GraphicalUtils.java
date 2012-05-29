@@ -1,7 +1,9 @@
 package com.mima.app.gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class GraphicalUtils {
 
@@ -11,9 +13,11 @@ public class GraphicalUtils {
 	public static final String DELETE = "Wegpunkt inkl. Verbindungen löschen";
 	
 	public static void drawLine(Graphics g, int xAxisStart, int yAxisStart,
-			int xAxisEnd, int yAxisEnd) {
+			int xAxisEnd, int yAxisEnd, int speed) {
 
-		g.drawLine(xAxisStart + RAD, yAxisStart + RAD, xAxisEnd + RAD, yAxisEnd	+ RAD);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(GraphicalUtils.getSpeedWidth(speed)));
+		g2.drawLine(xAxisStart + RAD, yAxisStart + RAD, xAxisEnd + RAD, yAxisEnd	+ RAD);
 
 	}
 
@@ -29,5 +33,17 @@ public class GraphicalUtils {
 	public static void drawLabel(Graphics g, String text, int xAxis, int yAxis) {
 
 		g.drawString(text, xAxis + (RAD*2) / 3, yAxis + (RAD*2) / 2 + 5);
+	}
+	
+	public static int getSpeedWidth(int speed) {
+		if(speed == 50) {
+			return 1;
+		}
+		else if(speed == 80) {
+			return 2;
+		}
+		else {
+			return 3;
+		}
 	}
 }

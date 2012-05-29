@@ -14,7 +14,9 @@ import com.mima.app.Dijkstra;
 import com.mima.app.bean.BerechnungsOptionen;
 import com.mima.app.bean.GuiRelevantBean;
 import com.mima.app.bean.OrtsPunktBean;
+import com.mima.db.bo.impl.PointBoImpl;
 import com.mima.db.bo.impl.StrasseBoImpl;
+import com.mima.db.dao.PointDao;
 import com.mima.db.dao.StrasseDao;
 import com.mima.db.exception.BoException;
 import com.mima.db.mock.StrassenMock01;
@@ -35,9 +37,10 @@ public class FindWayAction implements ActionListener {
 		BerechnungsOptionen calc = new BerechnungsOptionen();
 		calc.setMautAllowed(bean.getMaut().isSelected());
 		calc.setOption(String.valueOf(bean.getOption().getSelectedItem()));
-		
+
 		StrasseDao dao = new StrassenMock01();
-		Dijkstra dj = new Dijkstra(new StrasseBoImpl(dao), calc);
+		PointDao pdao = new StrassenMock01();
+		Dijkstra dj = new Dijkstra(new StrasseBoImpl(dao), new PointBoImpl(pdao), calc);
 		JFrame f = new JFrame("Streckenbeschreib von "+ bean.getStart().getText() +" nach "+bean.getEnde().getText());
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel center = new JPanel(new GridBagLayout());
