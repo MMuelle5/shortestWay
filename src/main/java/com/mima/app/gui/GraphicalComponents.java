@@ -12,12 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import com.mima.app.action.PaintAction;
-import com.mima.db.bo.PointBo;
-import com.mima.db.bo.StrasseBo;
-import com.mima.db.bo.impl.PointBoImpl;
-import com.mima.db.bo.impl.StrasseBoImpl;
-import com.mima.db.daofactory.DAOFactory;
-import com.mima.db.exception.BoException;
 import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseComponentDTO;
 
@@ -31,21 +25,23 @@ public class GraphicalComponents extends JPanel {
 	private PaintAction pa;
 	private boolean isMousePressed = false;
 
-	public GraphicalComponents(JFrame frame) {
+	public GraphicalComponents(JFrame frame, List<StrasseComponentDTO> str, List<OrtDTO> orte2) {
 		super();
 		pmenu.add(newPoint);
+		this.strassen = str;
+		this.orte = orte2;
 
-		DAOFactory daof = DAOFactory.getInstance();
-		PointBo pbo = new PointBoImpl(daof.getPointDao());
-		StrasseBo sbo = new StrasseBoImpl(daof.getStrasseDao());
-		try {
-			orte = pbo.findAllPointIds();
-			strassen = sbo.findAllStreetsToDisplay();
-		} catch (BoException e) {
-			e.printStackTrace();
-		}
+//		DAOFactory daof = DAOFactory.getInstance();
+//		PointBo pbo = new PointBoImpl(daof.getPointDao());
+//		StrasseBo sbo = new StrasseBoImpl(daof.getStrasseDao());
+//		try {
+//			orte = pbo.findAllPointIds();
+//			strassen = sbo.findAllStreetsToDisplay();
+//		} catch (BoException e) {
+//			e.printStackTrace();
+//		}
 		
-		pa = new PaintAction(this, orte, strassen, pb);
+		pa = new PaintAction(this, orte, strassen, pb, frame);
 		newPoint.addActionListener(pa);
 
 		this.addMouseListener(new MouseAdapter() {
@@ -87,14 +83,17 @@ public class GraphicalComponents extends JPanel {
 		for (StrasseComponentDTO c : strassen) {
 			if (c.getxEnd() != 0) {
 				GraphicalUtils.drawLine(g, c.getxStart(), c.getyStart(),
-						c.getxEnd(), c.getyEnd(), c.getSpeed());
+						c.getxEnd(), c.getyEnd(), c.getSpeed(), c.isShortestWay());
 			}
 		}
 
 		for (OrtDTO c : orte) {
 			GraphicalUtils.drawOval(g, c.getPointX(), c.getPointY(),
-					c.getDescription());
+					c.getDescription(), c.getShortestWay());
 		}
+//		super.paintComponents(g);
+//		frame.remove(this);
+//		frame.add(this);
 	}
 
 }

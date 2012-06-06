@@ -2,10 +2,15 @@ package com.mima.db.model;
 
 public class OrtDTO {
 
+	public static final int STARTENDPOINT = 1;
+	public static final int SHORTESTWAY = 2;
+	public static final int DEFAULT = 0;
+	
 	private Long pointId;
 	private int pointX;
 	private int pointY;
 	private String description;
+	private int shortestWay;
 	
 	public OrtDTO() {
 		super();
@@ -39,6 +44,12 @@ public class OrtDTO {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public int getShortestWay() {
+		return shortestWay;
+	}
+	public void setShortestWay(int shortestWay) {
+		this.shortestWay = shortestWay;
 	}
 	
 	

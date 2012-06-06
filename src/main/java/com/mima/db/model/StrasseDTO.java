@@ -41,4 +41,11 @@ public class StrasseDTO implements Serializable {
 		this.isMaut = isMaut;
 	}	
 	
+	public void initGegenrichtung(StrasseDTO dto) {
+		this.startPunktId = dto.getEndPunktId();
+		this.endPunktId = dto.getStartPunktId();
+		this.speed = dto.getSpeed();
+		this.distanz = dto.getDistanz();
+	}
+	
 }

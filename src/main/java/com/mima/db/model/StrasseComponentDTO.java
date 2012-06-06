@@ -11,6 +11,7 @@ public class StrasseComponentDTO {
 	private double distanz;
 	private int speed;
 	private boolean isMaut;
+	private boolean isShortestWay;
 	
 	public StrasseComponentDTO(int xStart, int yStart, int xEnd, int yEnd,
 			double distanz) {
@@ -76,6 +77,12 @@ public class StrasseComponentDTO {
 	}
 	public void setMaut(boolean isMaut) {
 		this.isMaut = isMaut;
+	}	
+	public boolean isShortestWay() {
+		return isShortestWay;
+	}
+	public void setShortestWay(boolean isShortestWay) {
+		this.isShortestWay = isShortestWay;
 	}
 	
 	public void incSpeed() {

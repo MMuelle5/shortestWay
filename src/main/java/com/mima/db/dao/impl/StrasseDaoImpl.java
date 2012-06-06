@@ -17,11 +17,12 @@ import com.mima.db.utils.HibernateDaoHelper;
 public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
 	private static final String FINDSTREETBYSTARTPOINT = "SELECT StartPoint, EndPoint, Distance, Speed, Toll FROM Way WHERE StartPoint = ?";
-	private static final String ALLSTREETSTODISPLAY = "SELECT pStart.xAxis AS startX, pStart.yAxis AS startY, " +
-															 " pEnd.xAxis AS endX, pEnd.yAxis AS endY, Distance, Speed, Toll " +
-														" FROM Way w " +
-														" INNER JOIN WayPoint pStart ON (pStart.id = w.StartPoint) " +
-														" INNER JOIN WayPoint pEnd ON (pEnd.id = w.EndPoint)";
+	private static final String ALLSTREETSTODISPLAY = "SELECT pStart.id AS StartId, pEnd.id AS EndId, " +
+															 "pStart.xAxis AS startX, pStart.yAxis AS startY, " +
+															" pEnd.xAxis AS endX, pEnd.yAxis AS endY, Distance, Speed, Toll " +
+														" FROM shortestWay.Way w " +
+														" INNER JOIN shortestWay.WayPoint pStart ON (pStart.id = w.StartPoint) " +
+														" INNER JOIN shortestWay.WayPoint pEnd ON (pEnd.id = w.EndPoint)";
 	private static final String CREATESTREET = "INSERT INTO Way (StartPoint, EndPoint, Distance, Speed, Toll) values(?,?,?,?,?)";
 	
 	private DAOFactory daoFactory;
@@ -67,6 +68,8 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
 		while(resultSet.next()) {
 			StrasseComponentDTO s = new StrasseComponentDTO();
+			s.setStartId(resultSet.getLong("StartId"));
+			s.setEndId(resultSet.getLong("EndId"));
 			s.setxStart(resultSet.getInt("startX"));
 			s.setyStart(resultSet.getInt("startY"));
 			s.setxEnd(resultSet.getInt("endX"));
