@@ -12,45 +12,37 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import com.mima.app.action.PaintAction;
-import com.mima.app.bean.OrtsPunktComponent;
-import com.mima.app.bean.StrasseComponent;
+import com.mima.db.model.OrtDTO;
+import com.mima.db.model.StrasseComponentDTO;
 
 public class GraphicalComponents extends JPanel {
 
 	private JPopupMenu pmenu = new JPopupMenu();
 	private JMenuItem newPoint = new JMenuItem(GraphicalUtils.NEWPOINT);
-	private JMenuItem newStreet = new JMenuItem(GraphicalUtils.NEWSTREET);
-	private JMenuItem delete = new JMenuItem(GraphicalUtils.DELETE);
-	private List<OrtsPunktComponent> orte = new ArrayList<OrtsPunktComponent>();
-	private List<StrasseComponent> strassen = new ArrayList<StrasseComponent>();
+	private List<OrtDTO> orte = new ArrayList<OrtDTO>();
+	private List<StrasseComponentDTO> strassen = new ArrayList<StrasseComponentDTO>();
 	private PaintBean pb = new PaintBean();
 	private PaintAction pa;
 	private boolean isMousePressed = false;
 
-	public GraphicalComponents(JFrame frame) {
+	public GraphicalComponents(JFrame frame, List<StrasseComponentDTO> str, List<OrtDTO> orte2) {
 		super();
 		pmenu.add(newPoint);
-		pmenu.add(newStreet);
-		pmenu.add(delete);
+		this.strassen = str;
+		this.orte = orte2;
 
-		int xAxisStart = 100;
-		int yAxisStart = 50;
-		int xAxisEnd = 200;
-		int yAxisEnd = 20;
-
-		OrtsPunktComponent c = new OrtsPunktComponent(xAxisStart, yAxisStart,
-				"pktA");
-		orte.add(c);
-		StrasseComponent s = new StrasseComponent(xAxisStart, yAxisStart,
-				xAxisEnd, yAxisEnd, 42);
-		strassen.add(s);
-		c = new OrtsPunktComponent(xAxisEnd, yAxisEnd, "pktB");
-		orte.add(c);
-
-		pa = new PaintAction(this, orte, strassen, pb);
+//		DAOFactory daof = DAOFactory.getInstance();
+//		PointBo pbo = new PointBoImpl(daof.getPointDao());
+//		StrasseBo sbo = new StrasseBoImpl(daof.getStrasseDao());
+//		try {
+//			orte = pbo.findAllPointIds();
+//			strassen = sbo.findAllStreetsToDisplay();
+//		} catch (BoException e) {
+//			e.printStackTrace();
+//		}
+		
+		pa = new PaintAction(this, orte, strassen, pb, frame);
 		newPoint.addActionListener(pa);
-		newStreet.addActionListener(pa);
-		delete.addActionListener(pa);
 
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent me) {
@@ -88,17 +80,20 @@ public class GraphicalComponents extends JPanel {
 
 	public void paintComponent(Graphics g) {
 
-		for (StrasseComponent c : strassen) {
+		for (StrasseComponentDTO c : strassen) {
 			if (c.getxEnd() != 0) {
 				GraphicalUtils.drawLine(g, c.getxStart(), c.getyStart(),
-						c.getxEnd(), c.getyEnd());
+						c.getxEnd(), c.getyEnd(), c.getSpeed(), c.isShortestWay());
 			}
 		}
 
-		for (OrtsPunktComponent c : orte) {
-			GraphicalUtils.drawOval(g, c.getxStart(), c.getyStart(),
-					c.getName());
+		for (OrtDTO c : orte) {
+			GraphicalUtils.drawOval(g, c.getPointX(), c.getPointY(),
+					c.getDescription(), c.getShortestWay());
 		}
+//		super.paintComponents(g);
+//		frame.remove(this);
+//		frame.add(this);
 	}
 
 }

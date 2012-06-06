@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.mima.app.bean.BerechnungsOptionen;
 import com.mima.app.bean.OrtsPunktBean;
+import com.mima.db.bo.impl.PointBoImpl;
 import com.mima.db.bo.impl.StrasseBoImpl;
 import com.mima.db.dao.StrasseDao;
 import com.mima.db.mock.StrassenMock07;
@@ -21,7 +22,7 @@ public class DJTest07 {
 		BerechnungsOptionen b = new BerechnungsOptionen();
 		b.setMautAllowed(false);
 		b.setOption(BerechnungsOptionen.SHORTESTWAY);
-		Dijkstra dj = new Dijkstra(new StrasseBoImpl(str), b);
+		Dijkstra dj = new Dijkstra(new StrasseBoImpl(str), new PointBoImpl(new StrassenMock07()), b);
 		try {
 			opb = dj.run(new Long(1), new Long(6));
 			assertTrue(true);

@@ -3,9 +3,10 @@ package com.mima.db.daofactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.mima.db.dao.PointDao;
 import com.mima.db.dao.StrasseDao;
 import com.mima.db.dao.exception.DAOConfigurationException;
-import com.mima.db.dao.exception.DAOException;
+import com.mima.db.dao.impl.PointDaoImpl;
 import com.mima.db.dao.impl.StrasseDaoImpl;
 import com.mima.db.dao.utility.DAOProperties;
 
@@ -43,10 +44,14 @@ public abstract class DAOFactory {
      * @throws SQLException Falls connection fail.
      * @throws Exception 
      */
-    public abstract Connection getConnection() throws DAOException;
+    public abstract Connection getConnection() throws SQLException;
 
 	public StrasseDao getStrasseDao() {
         return new StrasseDaoImpl(this);
+	}
+	
+	public PointDao getPointDao() {
+        return new PointDaoImpl(this);
 	}
     
 }

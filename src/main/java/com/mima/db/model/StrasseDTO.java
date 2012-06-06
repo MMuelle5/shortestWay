@@ -2,7 +2,7 @@ package com.mima.db.model;
 
 import java.io.Serializable;
 
-public class Strasse implements Serializable {
+public class StrasseDTO implements Serializable {
 
 	private Long startPunktId;
 	private Long endPunktId;
@@ -40,5 +40,12 @@ public class Strasse implements Serializable {
 	public void setMaut(boolean isMaut) {
 		this.isMaut = isMaut;
 	}	
+	
+	public void initGegenrichtung(StrasseDTO dto) {
+		this.startPunktId = dto.getEndPunktId();
+		this.endPunktId = dto.getStartPunktId();
+		this.speed = dto.getSpeed();
+		this.distanz = dto.getDistanz();
+	}
 	
 }

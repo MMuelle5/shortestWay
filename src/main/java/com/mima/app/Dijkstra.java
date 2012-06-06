@@ -6,10 +6,11 @@ import java.util.List;
 
 import com.mima.app.bean.BerechnungsOptionen;
 import com.mima.app.bean.OrtsPunktBean;
+import com.mima.db.bo.PointBo;
 import com.mima.db.bo.StrasseBo;
 import com.mima.db.exception.BoException;
 import com.mima.db.model.OrtDTO;
-import com.mima.db.model.Strasse;
+import com.mima.db.model.StrasseDTO;
 
 /**
  * 
@@ -21,33 +22,40 @@ public class Dijkstra {
 	private static final double DEFAULTDISTANZ = 99999999;
 	
 	private StrasseBo bo;
+	private PointBo pbo;
 	private HashMap<Long, OrtsPunktBean> punkte = new HashMap<Long, OrtsPunktBean>();
 	private BerechnungsOptionen berechnung;
 	
-	public Dijkstra(StrasseBo bo, BerechnungsOptionen berechnung) {
+	public Dijkstra(StrasseBo bo, PointBo pbo, BerechnungsOptionen berechnung) {
 		super();
 		this.bo = bo;
+		this.pbo = pbo;
 		this.berechnung = berechnung;
 	}
 
-	public OrtsPunktBean run(Long startPunktX, Long startPunktY, Long endPunktX, Long endPunktY) throws BoException {
-		OrtDTO start = bo.findPointByAxis(startPunktX, startPunktY);
-		OrtDTO end = bo.findPointByAxis(endPunktX, endPunktY);
+	public OrtsPunktBean run(int startPunktX, int startPunktY, int endPunktX, int endPunktY) throws BoException {
+		OrtDTO start = pbo.findPointByAxis(startPunktX, startPunktY);
+		OrtDTO end = pbo.findPointByAxis(endPunktX, endPunktY);
 		
 		return run(start.getPointId(), end.getPointId());
 	}
 	
 	/**
+	 * 
 	 * Startpunkt gegeben aktPkt = Startpunkt while(aktPkt != endPkt)
 	 * alleVerbindungen holen akt pkt als "vorbei gekommen" markieren neu
 	 * erhaltene Pkte mit distanz abfüllen neue Pkt bereits abgefüllt? ja:
 	 * kleiner? ja: pkt als neuen aktPkt nehmen nein: kleinster pkt als aktPkt
 	 * nehmen nein: kleinster pkt als aktPkt nehmen
+	 * @param startPunktId
+	 * @param endPunktId
+	 * @return
+	 * @throws BoException
 	 */
 	public OrtsPunktBean run(Long startPunktId, Long endPunktId) throws BoException {
 
 		// init 1. Bean
-		List<OrtDTO> allePunkte = bo.findAllPointIds();
+		List<OrtDTO> allePunkte = pbo.findAllPointIds();
 
 		OrtsPunktBean pktBean;
 		OrtDTO str;
@@ -66,7 +74,7 @@ public class Dijkstra {
 			punkte.put(pktBean.getPunkteId(), pktBean);
 		}
 
-		List<Strasse> nextList = new ArrayList<Strasse>();
+		List<StrasseDTO> nextList = new ArrayList<StrasseDTO>();
 		OrtsPunktBean aktPktBean = new OrtsPunktBean();
 		aktPktBean.setStreckenInklGewichtung(DEFAULTDISTANZ);
 		Long aktPkt;
@@ -84,32 +92,33 @@ public class Dijkstra {
 					allePunkte.remove(i);
 				} else if(aktPktBean.getStreckenInklGewichtung() > pkt.getStreckenInklGewichtung()){
 					aktPktBean = pkt;
-					aktPktBean.setKontrolliert(true);
 					hasNewPoint = true;
 					allePunkte.remove(i);
 				}
 			}
-			if(!hasNewPoint) {
-				return shortest;
-			}
+//			if(!hasNewPoint) {
+//				return shortest;
+//			}
 			hasNewPoint = false;
 			aktPkt = aktPktBean.getPunkteId();
+			aktPktBean.setKontrolliert(true);
+			punkte.get(aktPkt).setKontrolliert(true);
 				
-			while (aktPkt != endPunktId && !aktPkt.equals(endPunktId)) {
+//			while (aktPkt != endPunktId && !aktPkt.equals(endPunktId)) {
 	
 				nextList = bo.findStreetsByStartPoint(aktPkt);
 	
 				aktPktBean = getNextShortestPkt(nextList, aktPktBean);
 				if(aktPktBean.getStreckenInklGewichtung() != DEFAULTDISTANZ) {
 					aktPkt = aktPktBean.getPunkteId();
-					aktPktBean.setKontrolliert(true);
-					punkte.get(aktPkt).setKontrolliert(true);
+//					aktPktBean.setKontrolliert(true);
+//					punkte.get(aktPkt).setKontrolliert(true);
 				}
 				else { //sackgasse
 					break;
 				}
-			}
-			if(shortest.getStreckenInklGewichtung() > aktPktBean.getStreckenInklGewichtung()) {
+//			}
+			if(shortest.getStreckenInklGewichtung() > aktPktBean.getStreckenInklGewichtung() && (aktPkt == endPunktId || aktPkt.equals(endPunktId))) {
 				shortest = aktPktBean;
 			}
 		}
@@ -130,12 +139,12 @@ public class Dijkstra {
 	 * @param aktPktBean
 	 * @return
 	 */
-	private OrtsPunktBean getNextShortestPkt(List<Strasse> nextList, OrtsPunktBean aktPktBean) {
+	private OrtsPunktBean getNextShortestPkt(List<StrasseDTO> nextList, OrtsPunktBean aktPktBean) {
 		OrtsPunktBean nextPkt = new OrtsPunktBean();
 		OrtsPunktBean nextShortestPkt = new OrtsPunktBean();
 		nextShortestPkt = new OrtsPunktBean();
 		nextShortestPkt.setStreckenInklGewichtung(DEFAULTDISTANZ);
-		for (Strasse str : nextList) {
+		for (StrasseDTO str : nextList) {
 //			double totalDistanz = aktPktBean.getStreckenInklGewichtung() + str.getDistanz();
 			double totalDistanz = berechnung.calcDistanzInklGew(aktPktBean.getStreckenInklGewichtung(),str);
 

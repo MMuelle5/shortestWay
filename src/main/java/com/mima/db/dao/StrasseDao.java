@@ -1,15 +1,21 @@
 package com.mima.db.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.mima.db.model.OrtDTO;
-import com.mima.db.model.Strasse;
+import com.mima.db.model.StrasseComponentDTO;
+import com.mima.db.model.StrasseDTO;
 
 public interface StrasseDao {
 
-	public List<OrtDTO> findAllPoints();
+	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId) throws SQLException;
 
-	public List<Strasse> findStreetsByStartPoint(Long startPunktId);
+	public List<StrasseComponentDTO> findAllStreetsToDisplay() throws SQLException;
 
-	public OrtDTO findPointByAxis(Long punktX, Long punktY);
+	public void createStrasse(StrasseDTO dto) throws SQLException;
+
+	public void updateStrasse(StrasseDTO dto) throws SQLException;
+
+	public void deleteStrasse(StrasseDTO dto) throws SQLException;
+
 }
