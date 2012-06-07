@@ -18,7 +18,7 @@ public class GraphicalUtils {
 			int xAxisEnd, int yAxisEnd, int speed, boolean isShortestWay) {
 
 		if(isShortestWay) {
-			g.setColor(Color.PINK);
+			g.setColor(Color.CYAN);
 		}
 		else {
 			g.setColor(Color.BLACK);
@@ -32,7 +32,7 @@ public class GraphicalUtils {
 
 	public static void drawOval(Graphics g, int xAxis, int yAxis, String name, int shortestWay) {
 		if(shortestWay == OrtDTO.SHORTESTWAY) {
-			g.setColor(Color.PINK);
+			g.setColor(Color.CYAN);
 		}
 		else if(shortestWay == OrtDTO.STARTENDPOINT) {
 			g.setColor(Color.GREEN);

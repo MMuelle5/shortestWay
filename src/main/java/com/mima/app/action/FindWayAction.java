@@ -67,6 +67,7 @@ public class FindWayAction implements ActionListener {
 				Integer strHash = ortsMap.get(ort.getPointId().intValue());
 				if(ort.getPointId() == Long.valueOf(bean.getStart().getText()) || ort.getPointId() == Long.valueOf(bean.getEnde().getText())) {
 					ort.setShortestWay(OrtDTO.STARTENDPOINT);
+					streetMap.put(strHash, strHash);
 				}
 				else if(strHash != null) {
 					ort.setShortestWay(OrtDTO.SHORTESTWAY);
@@ -87,7 +88,6 @@ public class FindWayAction implements ActionListener {
 					sc.setShortestWay(false);
 				}
 			}
-			
 			
 			gc.repaint();
 			
@@ -125,7 +125,7 @@ public class FindWayAction implements ActionListener {
 
 
 			if(opb.getWay().get(i).getPrevPunkt() != null) {
-				pktHash = pktHash+opb.getWay().get(i).getPunkteId().intValue();
+				pktHash = pktHash+opb.getWay().get(i).getPrevPunkt().getPunkteId().intValue();
 				km = opb.getWay().get(i).getDistanz()-opb.getWay().get(i).getPrevPunkt().getDistanz();
 				
 				if(i == opb.getWay().size()-2) {
@@ -137,7 +137,7 @@ public class FindWayAction implements ActionListener {
 					double y = opb.getWay().get(i).getPointY()-opb.getWay().get(i).getPrevPunkt().getPointY();
 					steigungA = y/x;
 					double diff = steigungA - steigungB; //FIXME etwas stimmt hier nicht
-					System.out.println(diff);
+
 					if(diff < 4 && diff > -4) {
 						ausgabe = "Dem Streckenverlauf "+ km +" km in Richtung "+opb.getWay().get(i).getPunkteBeschreibung() +" folgen";
 					}
