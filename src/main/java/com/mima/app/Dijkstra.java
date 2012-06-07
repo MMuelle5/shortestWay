@@ -13,9 +13,10 @@ import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseDTO;
 
 /**
- * 
- * @author MARIUS
- * 
+ * Dijkstra-Algorithmus
+ *
+ * @author i10b@zhaw: M. MŸller / M. Ott
+ *
  */
 public class Dijkstra {
 
@@ -81,7 +82,7 @@ public class Dijkstra {
 		OrtsPunktBean pkt;
 		OrtsPunktBean shortest = new OrtsPunktBean();
 		shortest.setStreckenInklGewichtung(DEFAULTDISTANZ);
-		boolean hasNewPoint = false;
+//		boolean hasNewPoint = false;
 
 		while(allePunkte.size() != 0) {
 
@@ -92,14 +93,14 @@ public class Dijkstra {
 					allePunkte.remove(i);
 				} else if(aktPktBean.getStreckenInklGewichtung() > pkt.getStreckenInklGewichtung()){
 					aktPktBean = pkt;
-					hasNewPoint = true;
+//					hasNewPoint = true;
 					allePunkte.remove(i);
 				}
 			}
 //			if(!hasNewPoint) {
 //				return shortest;
 //			}
-			hasNewPoint = false;
+//			hasNewPoint = false;
 			aktPkt = aktPktBean.getPunkteId();
 			aktPktBean.setKontrolliert(true);
 			punkte.get(aktPkt).setKontrolliert(true);

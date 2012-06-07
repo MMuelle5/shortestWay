@@ -8,9 +8,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
 /**
  * Utility Klasse fuer DB-Calls
- * @author MARIUS
+ *
+ * @author i10b@zhaw: M. MŸller / M. Ott
  *
  */
 public final class DaoUtil {

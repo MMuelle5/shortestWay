@@ -19,6 +19,13 @@ import com.mima.db.exception.BoException;
 import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseComponentDTO;
 
+/**
+ * Anzeigepanel für linke Hälfte vom GUI
+ * zuständig für Wegpunkte und Strecke
+ *
+ * @author i10b@zhaw: M. Müller / M. Ott
+ *
+ */
 public class DisplayWay {
 
 	private JFrame frame;

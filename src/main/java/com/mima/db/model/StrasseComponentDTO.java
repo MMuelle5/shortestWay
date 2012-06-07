@@ -1,5 +1,12 @@
 package com.mima.db.model;
 
+
+/**
+ * beinhaltet alle nštigen Methoden um Strecken und deren Eigenschaften zu setzen/lesen
+ *
+ * @author i10b@zhaw: M. MŸller / M. Ott
+ *
+ */
 public class StrasseComponentDTO {
 
 	private int xStart;

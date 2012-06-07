@@ -8,7 +8,7 @@ import com.mima.db.model.StrasseDTO;
  * 2. Optionen:
  * 		- 0 = kuerzester Weg
  * 		- 1 = schnellster Weg
- * @author MARIUS
+ * @author i10b@zhaw: M. MŸller / M. Ott
  *
  */
 public class BerechnungsOptionen {

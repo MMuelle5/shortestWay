@@ -10,6 +10,12 @@ import com.mima.db.dao.impl.PointDaoImpl;
 import com.mima.db.dao.impl.StrasseDaoImpl;
 import com.mima.db.dao.utility.DAOProperties;
 
+/**
+ * Hier wird eine DB-Verbindung initiiert
+ *
+ * @author i10b@zhaw: M. MŸller / M. Ott
+ *
+ */
 public abstract class DAOFactory {
 
     private static final String PROPERTY_URL = "url";

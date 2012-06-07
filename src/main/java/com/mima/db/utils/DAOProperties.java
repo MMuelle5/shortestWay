@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+
 /**
- * Liest beim Verbindungsaufbau alle benoetigten Daten aus dem "daoProperties"-File,
+ * * Liest beim Verbindungsaufbau alle benoetigten Daten aus dem "daoProperties"-File,
  * welches sich im Root-Verzeichnis des Projekts befinden muss
- * @author MARIUS
+ * @Deprecated
+ *
+ * @author i10b@zhaw: M. MŸller / M. Ott
  *
  */
-@Deprecated
 public class DAOProperties {
 
     private static final String PROPERTIES_FILE = "src/main/java/resources/properties/database.properties";

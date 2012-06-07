@@ -10,6 +10,13 @@ import javax.swing.border.EmptyBorder;
 import com.mima.app.action.FindWayAction;
 import com.mima.app.bean.GuiRelevantBean;
 
+/**
+ * Rechte Seite vom GUI
+ * Auswahl des Start/Zielpunktes, Optionen und Start der Routensuche
+ *
+ * @author i10b@zhaw: M. MŸller / M. Ott
+ *
+ */
 public class DisplayEast {
 
 	private static JButton go = new JButton("Go");

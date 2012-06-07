@@ -1,5 +1,12 @@
 package com.mima.db.model;
 
+/**
+ * Klasse für Knoten
+ * Bietet verschiedene Methoden um Punkt-Infos zu setzen/lesen
+ *
+ * @author i10b@zhaw: M. Müller / M. Ott
+ *
+ */
 public class OrtDTO {
 
 	public static final int STARTENDPOINT = 1;
