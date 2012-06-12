@@ -131,7 +131,6 @@ public class FindWayAction implements ActionListener {
 	
 	/**
 	 * Popup wird angezeigt mit einem Textuellen Routenverlauf
-	 * Die Richtung wird anhand der Steigung der beiden Strassen berechnet
 	 * @param opb
 	 * @param ortsMap
 	 */
@@ -148,12 +147,9 @@ public class FindWayAction implements ActionListener {
 		gc.gridy = 0;
 		
 		String ausgabe = null;
-		double steigungA = 0;
-		double steigungB = 0;
 		double km;
 		
 		for(int i = opb.getWay().size()-1; i >=0; i--) {
-			steigungB = steigungA;
 			
 			Integer pktHash = null;
 			pktHash = (int) (opb.getWay().get(i).getPointX()+opb.getWay().get(i).getPointY());
@@ -167,20 +163,7 @@ public class FindWayAction implements ActionListener {
 							+" "+km+ " km folgen";
 				}
 				else{
-					double x = opb.getWay().get(i).getPointX()-opb.getWay().get(i).getPrevPunkt().getPointX();
-					double y = opb.getWay().get(i).getPointY()-opb.getWay().get(i).getPrevPunkt().getPointY();
-					steigungA = y/x;
-					double diff = steigungA - steigungB; //FIXME etwas stimmt hier nicht
-
-					if(diff < 0.1 && diff > -0.1) {
-						ausgabe = "Dem Streckenverlauf "+ km +" km in Richtung "+opb.getWay().get(i).getPunkteBeschreibung() +" folgen";
-					}
-					else if(diff <= -0.1) {
-						ausgabe = "Links in Richtung "+ opb.getWay().get(i).getPunkteBeschreibung()+" abbiegen und  "+ km +" km dem Streckenverlauf folgen";
-					}
-					else {
-						ausgabe = "Rechts in Richtung "+ opb.getWay().get(i).getPunkteBeschreibung()+" abbiegen und  "+ km +" km dem Streckenverlauf folgen";
-					}
+					ausgabe = "In Richtung "+opb.getWay().get(i).getPunkteBeschreibung() +" abbiegen und "+km +" km dem Streckenverlauf forlgen";
 				}
 				
 				ortsMap.put(opb.getWay().get(i).getPunkteId().intValue(), pktHash);
