@@ -3,7 +3,13 @@ package com.mima.app.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Relevant zur Berechnung des DJ-Algorithmus
+ * Beinhaltet alle Wichtigen Infos dazu
+ * u.A. den gesamten Pfad vom Startpunkt aus
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class OrtsPunktBean{
 
 	private Long punkteId;

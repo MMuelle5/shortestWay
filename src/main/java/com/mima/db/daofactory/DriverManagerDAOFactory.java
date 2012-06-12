@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Bean zur Haltung von Connection-Infos
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 class DriverManagerDAOFactory extends DAOFactory {
     private String url;
     private String username;

@@ -29,6 +29,13 @@ import com.mima.db.exception.BoException;
 import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseComponentDTO;
 
+/**
+ * 1. Liest die Berechnungsoptionen aus und uebergibt diese an Dijkstra.java
+ * 2. Faerbt die betroffenen Punkte ein
+ * 3. Listet die Wegpunkte auf
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class FindWayAction implements ActionListener {
 
 	private GuiRelevantBean bean;
@@ -122,6 +129,12 @@ public class FindWayAction implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Popup wird angezeigt mit einem Textuellen Routenverlauf
+	 * Die Richtung wird anhand der Steigung der beiden Strassen berechnet
+	 * @param opb
+	 * @param ortsMap
+	 */
 	private void displayWayDescription(OrtsPunktBean opb, Map<Integer, Integer> ortsMap) {
 		
 		JFrame f = new JFrame("Streckenbeschreib von "+ bean.getStart().getText() +" nach "+bean.getEnde().getText());
@@ -138,8 +151,7 @@ public class FindWayAction implements ActionListener {
 		double steigungA = 0;
 		double steigungB = 0;
 		double km;
-		List<OrtsPunktBean> weg = opb.getWay();
-		System.out.println(weg.size());
+		
 		for(int i = opb.getWay().size()-1; i >=0; i--) {
 			steigungB = steigungA;
 			
@@ -160,10 +172,10 @@ public class FindWayAction implements ActionListener {
 					steigungA = y/x;
 					double diff = steigungA - steigungB; //FIXME etwas stimmt hier nicht
 
-					if(diff < 4 && diff > -4) {
+					if(diff < 0.1 && diff > -0.1) {
 						ausgabe = "Dem Streckenverlauf "+ km +" km in Richtung "+opb.getWay().get(i).getPunkteBeschreibung() +" folgen";
 					}
-					else if(diff >= 0.1) {
+					else if(diff <= -0.1) {
 						ausgabe = "Links in Richtung "+ opb.getWay().get(i).getPunkteBeschreibung()+" abbiegen und  "+ km +" km dem Streckenverlauf folgen";
 					}
 					else {

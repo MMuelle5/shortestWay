@@ -2,6 +2,12 @@ package com.mima.db.model;
 
 import java.io.Serializable;
 
+/**
+ * Der DJ-Algo arbeitet mit diesem DTO
+ * (Anzeigeangaben sind nicht notwendig)
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class StrasseDTO implements Serializable {
 
 	private Long startPunktId;

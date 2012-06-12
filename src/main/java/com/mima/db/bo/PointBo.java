@@ -6,7 +6,7 @@ import com.mima.db.exception.BoException;
 import com.mima.db.model.OrtDTO;
 
 /**
- * Business-Object fuer alle Punkte-DB-andbinungen
+ * Business-Object fuer alle Punkte-DB-Andbinungen
  * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */

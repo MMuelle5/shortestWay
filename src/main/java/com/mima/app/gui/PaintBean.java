@@ -1,5 +1,11 @@
 package com.mima.app.gui;
 
+/**
+ * Bean, das den Mousepress/release Punkt speichert
+ * und der PaintAction uebergibt
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class PaintBean {
 
 	private int xAxis = 0;

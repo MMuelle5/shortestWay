@@ -6,6 +6,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Bean speichert GUI-Informationen
+ * insbesondere Filter-/Suchkriterien
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class GuiRelevantBean {
 
 	private JPanel panel;

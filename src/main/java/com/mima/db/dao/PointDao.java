@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.mima.db.model.OrtDTO;
 
+/**
+ * Umsetzung aller DB-Zugriffe, die im PointBo verlangt sind
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public interface PointDao {
 
 	public OrtDTO findPointByAxis(int punktX, int punktY) throws SQLException;

@@ -1,5 +1,11 @@
 package com.mima.db.exception;
 
+/**
+ * Business-Object Error-Klasse
+ * Alle Errors des BO-Layers sollten zu einem Solchen gecastet werden
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class BoException extends Exception {
     /**
      * @param message Fehlerbeschreibung

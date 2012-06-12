@@ -82,7 +82,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 			s.setyStart(resultSet.getInt("startY"));
 			s.setxEnd(resultSet.getInt("endX"));
 			s.setyEnd(resultSet.getInt("endY"));
-			s.setDistanz(resultSet.getLong("Distance"));
+			s.setDistanz(resultSet.getDouble("Distance"));
 			s.setSpeed(resultSet.getInt("Speed"));
 			s.setMaut(resultSet.getBoolean("Toll"));
 			map.put(s.hashCode(), s);

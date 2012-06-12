@@ -15,6 +15,11 @@ import com.mima.app.action.PaintAction;
 import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseComponentDTO;
 
+/**
+ * Zeichnungsmaske im Zentralen Bereich
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class GraphicalComponents extends JPanel {
 
 	private JPopupMenu pmenu = new JPopupMenu();

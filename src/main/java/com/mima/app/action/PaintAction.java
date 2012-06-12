@@ -18,6 +18,15 @@ import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseComponentDTO;
 import com.mima.db.model.StrasseDTO;
 
+/**
+ * beinhaltet die Logik zum Zeichnen der Strassen/Punkte
+ * 1. Punkte hinzufuegen (simpel)
+ * 2. Strassen zeichnen:
+ * 		-Anfang&Endpunkt der Linie ist ein Punkt? (wenn nein, nichts machen)
+ * 		-Strasse bereits vorhanden? (wenn ja, bestehende bearbeiten; sonst neu)
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class PaintAction implements ActionListener{
 
 	private List<OrtDTO> orte;

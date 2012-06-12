@@ -7,6 +7,11 @@ import java.awt.Graphics2D;
 
 import com.mima.db.model.OrtDTO;
 
+/**
+ * Hilfsklasse zum zeichnen der Punkte/Wege
+ * @author i10b@zhaw: M. Mueller / M. Ott
+ *
+ */
 public class GraphicalUtils {
 
 	public static final int RAD = 35;
