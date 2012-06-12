@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -18,6 +19,7 @@ import com.mima.app.bean.BerechnungsOptionen;
 import com.mima.app.bean.GuiRelevantBean;
 import com.mima.app.bean.OrtsPunktBean;
 import com.mima.app.gui.GraphicalComponents;
+import com.mima.db.bo.PointBo;
 import com.mima.db.bo.impl.PointBoImpl;
 import com.mima.db.bo.impl.StrasseBoImpl;
 import com.mima.db.dao.PointDao;
@@ -54,18 +56,44 @@ public class FindWayAction implements ActionListener {
 
 		StrasseDao dao = factory.getStrasseDao();
 		PointDao pdao = factory.getPointDao();
-		Dijkstra dj = new Dijkstra(new StrasseBoImpl(dao), new PointBoImpl(pdao), calc);
+		
+		PointBo pbo = new PointBoImpl(pdao);
+		Long startId = null;
+		try {
+			startId = pbo.findPointIdByName(bean.getStart().getText());
+		} catch (BoException e1) {
+			JOptionPane.showMessageDialog(null, "Startpunkt wurde nicht gefunden", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		Long endId = null;
+		try {
+			endId = pbo.findPointIdByName(bean.getEnde().getText());
+		} catch (BoException e1) {
+			JOptionPane.showMessageDialog(null, "Endpunkt wurde nicht gefunden", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		Map<Integer, Integer> ortsMap = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> streetMap = new HashMap<Integer, Integer>();
+		
+		Dijkstra dj = new Dijkstra(new StrasseBoImpl(dao), pbo, calc);
 		
 		try {
-			OrtsPunktBean opb = dj.run(Long.valueOf(bean.getStart().getText()), Long.valueOf(bean.getEnde().getText()));
-			Map<Integer, Integer> ortsMap = new HashMap<Integer, Integer>();
-			Map<Integer, Integer> streetMap = new HashMap<Integer, Integer>();
-			
-			displayWayDescription(opb, ortsMap);
+			OrtsPunktBean opb;
+			try {
+				opb = dj.run(startId, endId);
+
+				displayWayDescription(opb, ortsMap);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Die Punkte konnten nicht verbunden werden", "Error", JOptionPane.ERROR_MESSAGE);
+				frame.setVisible(false);
+				frame.pack();
+				frame.setVisible(true);
+			}
 			
 			for(OrtDTO ort : orte) {
 				Integer strHash = ortsMap.get(ort.getPointId().intValue());
-				if(ort.getPointId() == Long.valueOf(bean.getStart().getText()) || ort.getPointId() == Long.valueOf(bean.getEnde().getText())) {
+				if(ort.getPointId() == startId || ort.getPointId() == endId) {
 					ort.setShortestWay(OrtDTO.STARTENDPOINT);
 					streetMap.put(strHash, strHash);
 				}
@@ -89,13 +117,7 @@ public class FindWayAction implements ActionListener {
 			
 			gc.repaint();
 			
-			frame.setVisible(false);
-			frame.pack();
-			frame.setVisible(true);
-			
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (BoException e) {
 			e.printStackTrace();
 		}
 	}
@@ -116,14 +138,16 @@ public class FindWayAction implements ActionListener {
 		double steigungA = 0;
 		double steigungB = 0;
 		double km;
+		List<OrtsPunktBean> weg = opb.getWay();
+		System.out.println(weg.size());
 		for(int i = opb.getWay().size()-1; i >=0; i--) {
 			steigungB = steigungA;
 			
-			Integer pktHash = opb.getWay().get(i).getPunkteId().intValue();
-
-
+			Integer pktHash = null;
+			pktHash = (int) (opb.getWay().get(i).getPointX()+opb.getWay().get(i).getPointY());
+			
 			if(opb.getWay().get(i).getPrevPunkt() != null) {
-				pktHash = pktHash+opb.getWay().get(i).getPrevPunkt().getPunkteId().intValue();
+				pktHash = pktHash+Integer.valueOf((int) (opb.getWay().get(i).getPrevPunkt().getPointX()+opb.getWay().get(i).getPrevPunkt().getPointY()));
 				km = opb.getWay().get(i).getDistanz()-opb.getWay().get(i).getPrevPunkt().getDistanz();
 				
 				if(i == opb.getWay().size()-2) {

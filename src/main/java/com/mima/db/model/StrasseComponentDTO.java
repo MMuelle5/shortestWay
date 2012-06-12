@@ -108,7 +108,8 @@ public class StrasseComponentDTO {
 	}
 	
 	public int hashCode() {
-		return (int) (startId+endId);
+		int hash = xEnd+xStart+yEnd+yStart;
+		return hash;
 	}
 	
 }

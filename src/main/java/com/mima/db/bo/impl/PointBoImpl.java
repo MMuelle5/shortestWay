@@ -53,4 +53,17 @@ public class PointBoImpl implements PointBo{
 			throw new BoException(e);
 		}
 	}
+
+	@Override
+	public Long findPointIdByName(String name) throws BoException {
+		try {
+			Long pointId = dao.findPointIdByName(name);
+			if(pointId == null) {
+	        	throw new BoException("Name not found");
+	        }
+			return pointId;
+		} catch (SQLException e) {
+			throw new BoException(e);
+		}
+	}
 }

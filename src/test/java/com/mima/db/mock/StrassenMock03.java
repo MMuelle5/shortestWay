@@ -145,6 +145,11 @@ public class StrassenMock03 implements StrasseDao, PointDao{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public Long findPointIdByName(String name) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 }

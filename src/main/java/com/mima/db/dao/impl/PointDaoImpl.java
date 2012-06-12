@@ -17,6 +17,7 @@ public class PointDaoImpl implements PointDao{
 	private static final String FINDALLPOINTS = "SELECT id, xAxis, yAxis, name FROM WayPoint";
 	private static final String FINDPOINTBYAXIS = "SELECT id, xAxis, yAxis, name FROM WayPoint WHERE xAxis=? AND yAxis=?";
 	private static final String CREATEPOINT = "INSERT INTO WayPoint (xAxis, yAxis, name) values(?,?,?)";
+	private static final String FINDPOINTBYNAME = "SELECT id FROM WayPoint WHERE name=?";
 
 	private DAOFactory daoFactory;
 	
@@ -78,7 +79,23 @@ public class PointDaoImpl implements PointDao{
 
 	@Override
 	public void deletePoint(OrtDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Long findPointIdByName(String name) throws SQLException {
+
+        PreparedStatement preparedStatement = null;
+
+        Connection connection = daoFactory.getConnection();
+		preparedStatement = DaoUtil.prepareStatement(connection, FINDPOINTBYNAME, false, new Object[]{name});
+        ResultSet rs = preparedStatement.executeQuery();
+        Long retVal = null;
+        
+        while(rs.next()) {
+        	retVal = rs.getLong("id");
+        }
+
+        return retVal;
 	}
 }

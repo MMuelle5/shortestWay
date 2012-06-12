@@ -124,9 +124,6 @@ public class PaintAction implements ActionListener{
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-
-//		p.repaint();
-
 	}
 
 	private void repaint() {
@@ -147,7 +144,7 @@ public class PaintAction implements ActionListener{
 
 		double dist = Math.sqrt(width*width+height*height);
 		
-		return dist/100;
+		return dist/10;
 	}
 	private boolean isInRange(int val, int range) {
 		return val > 0 && val < range;

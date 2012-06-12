@@ -8,7 +8,6 @@ import com.mima.app.bean.BerechnungsOptionen;
 import com.mima.app.bean.OrtsPunktBean;
 import com.mima.db.bo.PointBo;
 import com.mima.db.bo.StrasseBo;
-import com.mima.db.exception.BoException;
 import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseDTO;
 
@@ -34,7 +33,7 @@ public class Dijkstra {
 		this.berechnung = berechnung;
 	}
 
-	public OrtsPunktBean run(int startPunktX, int startPunktY, int endPunktX, int endPunktY) throws BoException {
+	public OrtsPunktBean run(int startPunktX, int startPunktY, int endPunktX, int endPunktY) throws Exception {
 		OrtDTO start = pbo.findPointByAxis(startPunktX, startPunktY);
 		OrtDTO end = pbo.findPointByAxis(endPunktX, endPunktY);
 		
@@ -51,9 +50,9 @@ public class Dijkstra {
 	 * @param startPunktId
 	 * @param endPunktId
 	 * @return
-	 * @throws BoException
+	 * @throws Exception 
 	 */
-	public OrtsPunktBean run(Long startPunktId, Long endPunktId) throws BoException {
+	public OrtsPunktBean run(Long startPunktId, Long endPunktId) throws Exception {
 
 		// init 1. Bean
 		List<OrtDTO> allePunkte = pbo.findAllPointIds();
@@ -78,13 +77,15 @@ public class Dijkstra {
 		List<StrasseDTO> nextList = new ArrayList<StrasseDTO>();
 		OrtsPunktBean aktPktBean = new OrtsPunktBean();
 		aktPktBean.setStreckenInklGewichtung(DEFAULTDISTANZ);
-		Long aktPkt;
+		Long aktPkt = null;
 		OrtsPunktBean pkt;
 		OrtsPunktBean shortest = new OrtsPunktBean();
 		shortest.setStreckenInklGewichtung(DEFAULTDISTANZ);
 
-		while(allePunkte.size() != 0) {
+		while(aktPkt != endPunktId) {
 
+			aktPktBean = new OrtsPunktBean();
+			aktPktBean.setStreckenInklGewichtung(DEFAULTDISTANZ);
 			for(int i = allePunkte.size()-1; i >=0; i--) {
 				str = allePunkte.get(i);
 				pkt = punkte.get(str.getPointId());
@@ -92,25 +93,25 @@ public class Dijkstra {
 					allePunkte.remove(i);
 				} else if(aktPktBean.getStreckenInklGewichtung() > pkt.getStreckenInklGewichtung()){
 					aktPktBean = pkt;
-					allePunkte.remove(i);
 				}
 			}
 
 			aktPkt = aktPktBean.getPunkteId();
+			if(aktPkt != null) {
+				punkte.get(aktPkt).setKontrolliert(true);
+				if(aktPkt == endPunktId) {
+					return aktPktBean;
+				}
+			}
+			else {
+				throw new Exception(); // Punkt wird nicht erreicht
+			}
 			aktPktBean.setKontrolliert(true);
-			punkte.get(aktPkt).setKontrolliert(true);
 				
-	
 			nextList = bo.findStreetsByStartPoint(aktPkt);
 
 			aktPktBean = getNextShortestPkt(nextList, aktPktBean);
-			if(aktPktBean.getStreckenInklGewichtung() != DEFAULTDISTANZ) {
-				aktPkt = aktPktBean.getPunkteId();
-			}
-			else { //sackgasse
-				break;
-			}
-				
+
 			if(shortest.getStreckenInklGewichtung() > aktPktBean.getStreckenInklGewichtung() && (aktPkt == endPunktId || aktPkt.equals(endPunktId))) {
 				shortest = aktPktBean;
 			}
@@ -135,22 +136,17 @@ public class Dijkstra {
 			double totalDistanz = berechnung.calcDistanzInklGew(aktPktBean.getStreckenInklGewichtung(),str);
 
 			nextPkt = punkte.get(str.getEndPunktId());
-			if (nextPkt.getPunkteId() != null) {
-				if (nextPkt.isKontrolliert()) {
-					continue;
-				} else if (totalDistanz < nextPkt.getStreckenInklGewichtung()) {
+			if (nextPkt.isKontrolliert()) {
+				continue;
+			}
+			else if (nextPkt.getPrevPunkt() != null && totalDistanz < nextPkt.getStreckenInklGewichtung()) {
 					nextPkt.setStreckenInklGewichtung(totalDistanz);
 					nextPkt.setDistanz(aktPktBean.getDistanz()+str.getDistanz());
 					nextPkt.setPrevPunkt(aktPktBean);
-				}
 			} else {
-//				nextPkt = new OrtsPunktBean();
 				nextPkt.setStreckenInklGewichtung(totalDistanz);
 				nextPkt.setDistanz(aktPktBean.getDistanz()+str.getDistanz());
-//				nextPkt.setPunkteBeschreibung(str.getEndPunktName());
-//				nextPkt.setPunkteId(str.getEndPunktId());
 				nextPkt.setPrevPunkt(aktPktBean);
-//				punkte.put(nextPkt.getPunkteId(), nextPkt);
 			}
 			if (nextPkt.getStreckenInklGewichtung() < nextShortestPkt.getStreckenInklGewichtung()) {
 				nextShortestPkt = nextPkt;
