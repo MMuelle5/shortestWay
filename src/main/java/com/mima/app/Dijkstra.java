@@ -82,7 +82,6 @@ public class Dijkstra {
 		OrtsPunktBean pkt;
 		OrtsPunktBean shortest = new OrtsPunktBean();
 		shortest.setStreckenInklGewichtung(DEFAULTDISTANZ);
-//		boolean hasNewPoint = false;
 
 		while(allePunkte.size() != 0) {
 
@@ -93,43 +92,29 @@ public class Dijkstra {
 					allePunkte.remove(i);
 				} else if(aktPktBean.getStreckenInklGewichtung() > pkt.getStreckenInklGewichtung()){
 					aktPktBean = pkt;
-//					hasNewPoint = true;
 					allePunkte.remove(i);
 				}
 			}
-//			if(!hasNewPoint) {
-//				return shortest;
-//			}
-//			hasNewPoint = false;
+
 			aktPkt = aktPktBean.getPunkteId();
 			aktPktBean.setKontrolliert(true);
 			punkte.get(aktPkt).setKontrolliert(true);
 				
-//			while (aktPkt != endPunktId && !aktPkt.equals(endPunktId)) {
 	
-				nextList = bo.findStreetsByStartPoint(aktPkt);
-	
-				aktPktBean = getNextShortestPkt(nextList, aktPktBean);
-				if(aktPktBean.getStreckenInklGewichtung() != DEFAULTDISTANZ) {
-					aktPkt = aktPktBean.getPunkteId();
-//					aktPktBean.setKontrolliert(true);
-//					punkte.get(aktPkt).setKontrolliert(true);
-				}
-				else { //sackgasse
-					break;
-				}
-//			}
+			nextList = bo.findStreetsByStartPoint(aktPkt);
+
+			aktPktBean = getNextShortestPkt(nextList, aktPktBean);
+			if(aktPktBean.getStreckenInklGewichtung() != DEFAULTDISTANZ) {
+				aktPkt = aktPktBean.getPunkteId();
+			}
+			else { //sackgasse
+				break;
+			}
+				
 			if(shortest.getStreckenInklGewichtung() > aktPktBean.getStreckenInklGewichtung() && (aktPkt == endPunktId || aktPkt.equals(endPunktId))) {
 				shortest = aktPktBean;
 			}
 		}
-
-//		Testfall-Ausgabe
-//		for(int i = 1; i <= 5; i++) {
-//
-//			System.out.println(punkte.get(new Long(i)).getPunkteBeschreibung());
-//			System.out.println(punkte.get(new Long(i)).getHistory());
-//		}
 		
 		return shortest;
 	}
@@ -146,7 +131,7 @@ public class Dijkstra {
 		nextShortestPkt = new OrtsPunktBean();
 		nextShortestPkt.setStreckenInklGewichtung(DEFAULTDISTANZ);
 		for (StrasseDTO str : nextList) {
-//			double totalDistanz = aktPktBean.getStreckenInklGewichtung() + str.getDistanz();
+
 			double totalDistanz = berechnung.calcDistanzInklGew(aktPktBean.getStreckenInklGewichtung(),str);
 
 			nextPkt = punkte.get(str.getEndPunktId());

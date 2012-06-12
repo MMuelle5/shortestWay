@@ -39,16 +39,23 @@ public class StrasseBoImpl implements StrasseBo {
 	@Override
 	public int mergeOrDelStrasse(StrasseDTO dto) throws BoException {
 		try {
+
+			StrasseDTO gegenRichtungDto = new StrasseDTO();
+			gegenRichtungDto.initGegenrichtung(dto);
+			
 			if(dto.getSpeed()== 50) {
 				dao.createStrasse(dto);
+				dao.createStrasse(gegenRichtungDto);
 				return 1;
 			}
 			else if(dto.getSpeed() != 0) {
 				dao.updateStrasse(dto);
+				dao.updateStrasse(gegenRichtungDto);
 				return 2;
 			}
 			else {
 				dao.deleteStrasse(dto);
+				dao.deleteStrasse(gegenRichtungDto);
 				return 3;
 			}
 		} catch (SQLException e) {

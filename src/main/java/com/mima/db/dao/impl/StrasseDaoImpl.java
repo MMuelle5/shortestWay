@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mima.db.dao.StrasseDao;
 import com.mima.db.dao.utility.DaoUtil;
@@ -24,6 +26,11 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 														" INNER JOIN shortestWay.WayPoint pStart ON (pStart.id = w.StartPoint) " +
 														" INNER JOIN shortestWay.WayPoint pEnd ON (pEnd.id = w.EndPoint)";
 	private static final String CREATESTREET = "INSERT INTO Way (StartPoint, EndPoint, Distance, Speed, Toll) values(?,?,?,?,?)";
+	private static final String DELETESTREET = "DELETE FROM Way WHERE StartPoint = ? AND EndPoint = ?";
+	private static final String UPDATESTREET = " UPDATE Way " +
+											   " SET Speed = ?" +
+											   "    ,Toll = ?" +
+											   " WHERE StartPoint = ? AND EndPoint = ?";
 	
 	private DAOFactory daoFactory;
 	
@@ -66,6 +73,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 		
         resultSet = preparedStatement.executeQuery();
 
+        Map<Integer, StrasseComponentDTO> map = new HashMap<Integer, StrasseComponentDTO>();
 		while(resultSet.next()) {
 			StrasseComponentDTO s = new StrasseComponentDTO();
 			s.setStartId(resultSet.getLong("StartId"));
@@ -77,8 +85,10 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 			s.setDistanz(resultSet.getLong("Distance"));
 			s.setSpeed(resultSet.getInt("Speed"));
 			s.setMaut(resultSet.getBoolean("Toll"));
-			retVal.add(s);
+			map.put(s.hashCode(), s);
+//			retVal.add(s);
 		}
+		retVal.addAll(map.values());
 		return retVal;
 	}
 
@@ -96,14 +106,22 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 
 	@Override
 	public void updateStrasse(StrasseDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		
+
+        PreparedStatement preparedStatement = null;
+
+        Connection connection = daoFactory.getConnection();
+		preparedStatement = DaoUtil.prepareStatement(connection, UPDATESTREET, false, new Object[]{dto.getSpeed(), dto.isMaut(), dto.getStartPunktId(), dto.getEndPunktId()});
+        preparedStatement.executeUpdate();
 	}
 
 	@Override
 	public void deleteStrasse(StrasseDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		
+
+        PreparedStatement preparedStatement = null;
+
+        Connection connection = daoFactory.getConnection();
+		preparedStatement = DaoUtil.prepareStatement(connection, DELETESTREET, false, new Object[]{dto.getStartPunktId(), dto.getEndPunktId()});
+        preparedStatement.executeUpdate();
 	}
 
 }

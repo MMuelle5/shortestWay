@@ -30,18 +30,8 @@ public class GraphicalComponents extends JPanel {
 		pmenu.add(newPoint);
 		this.strassen = str;
 		this.orte = orte2;
-
-//		DAOFactory daof = DAOFactory.getInstance();
-//		PointBo pbo = new PointBoImpl(daof.getPointDao());
-//		StrasseBo sbo = new StrasseBoImpl(daof.getStrasseDao());
-//		try {
-//			orte = pbo.findAllPointIds();
-//			strassen = sbo.findAllStreetsToDisplay();
-//		} catch (BoException e) {
-//			e.printStackTrace();
-//		}
 		
-		pa = new PaintAction(this, orte, strassen, pb, frame);
+		pa = new PaintAction(orte, strassen, pb, frame);
 		newPoint.addActionListener(pa);
 
 		this.addMouseListener(new MouseAdapter() {
@@ -58,7 +48,6 @@ public class GraphicalComponents extends JPanel {
 					}
 				}
 				else if(isMousePressed) {
-					System.out.println("wech");
 					isMousePressed = false;
 					pb.setxAxisEnd(me.getX());
 					pb.setyAxisEnd(me.getY());
@@ -68,7 +57,6 @@ public class GraphicalComponents extends JPanel {
 			}
 			public void mousePressed(MouseEvent me) {
 				if (!me.isPopupTrigger()) {
-					System.out.println("wusch");
 					isMousePressed = true;
 					pb.setxAxis(me.getX());
 					pb.setyAxis(me.getY());
@@ -91,9 +79,6 @@ public class GraphicalComponents extends JPanel {
 			GraphicalUtils.drawOval(g, c.getPointX(), c.getPointY(),
 					c.getDescription(), c.getShortestWay());
 		}
-//		super.paintComponents(g);
-//		frame.remove(this);
-//		frame.add(this);
 	}
 
 }

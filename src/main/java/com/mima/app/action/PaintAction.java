@@ -5,9 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-import com.mima.app.gui.GraphicalComponents;
 import com.mima.app.gui.GraphicalUtils;
 import com.mima.app.gui.PaintBean;
 import com.mima.db.bo.PointBo;
@@ -22,7 +20,6 @@ import com.mima.db.model.StrasseDTO;
 
 public class PaintAction implements ActionListener{
 
-	private JPanel p;
 	private List<OrtDTO> orte;
 	private List<StrasseComponentDTO> strassen;
 	private PaintBean pb;
@@ -31,8 +28,7 @@ public class PaintAction implements ActionListener{
 	private JFrame frame;
 	
 
-	public PaintAction(GraphicalComponents graphicalComponents, List<OrtDTO> orte2, List<StrasseComponentDTO> str, PaintBean pb, JFrame frame) {
-		this.p = graphicalComponents;
+	public PaintAction(List<OrtDTO> orte2, List<StrasseComponentDTO> str, PaintBean pb, JFrame frame) {
 		this.orte = orte2;
 		this.strassen = str;
 		this.pb = pb;
@@ -52,6 +48,7 @@ public class PaintAction implements ActionListener{
 				e1.printStackTrace();
 			}
 			orte.add(dto);
+			repaint();
 		}
 		else {
 			if(pb.getxAxis() != 0 && pb.getyAxis() != 0 && pb.getxAxisEnd() != 0 && pb.getyAxisEnd() != 0) {
@@ -60,14 +57,11 @@ public class PaintAction implements ActionListener{
 				if((50 < (pb.getxAxis() - pb.getxAxisEnd()) || (pb.getxAxis() - pb.getxAxisEnd()) < -50)
 					||(50 < (pb.getyAxis() - pb.getyAxisEnd()) || (pb.getyAxis() - pb.getyAxisEnd()) < -50)) {
 					int existingIdx = 0;
-					System.out.println(pb.getxAxis()+"/"+pb.getyAxis());
-					System.out.println(pb.getxAxisEnd()+"/"+pb.getyAxisEnd());
 					boolean isStartSet = false;
 					boolean isEndSet = false;
 					StrasseComponentDTO sc = new StrasseComponentDTO();
 					
 					for(OrtDTO ort : orte) {
-						System.out.println("Ort: "+ort.getPointX()+"/"+ort.getPointY());
 						if(isInRange((pb.getxAxis()-ort.getPointX()), 75) && isInRange((pb.getyAxis()- ort.getPointY()), 75)) {
 							sc.setxStart(ort.getPointX());
 							sc.setyStart(ort.getPointY());
@@ -90,7 +84,6 @@ public class PaintAction implements ActionListener{
 						sc.setSpeed(50);
 						int i = 0;
 						for(StrasseComponentDTO sdto : strassen) {
-							System.out.println(sdto);
 							if(sdto.hashCode() == sc.hashCode()) {
 								sdto.incSpeed();
 								sc.setSpeed(sdto.getSpeed());
@@ -106,20 +99,18 @@ public class PaintAction implements ActionListener{
 							sDto.setSpeed(sc.getSpeed());
 							sDto.setDistanz(clacLength(sc.getyStart()-sc.getyEnd(), sc.getxStart()-sc.getxEnd()));
 							
-							StrasseDTO gegenRichtungDto = new StrasseDTO();
-							gegenRichtungDto.initGegenrichtung(sDto);
 							int status = sbo.mergeOrDelStrasse(sDto);
-							sbo.mergeOrDelStrasse(gegenRichtungDto);
+							
 							if(status==1) {
 								strassen.add(sc);
 							}
 							else if(status == 2) {
-								strassen.add(sc);
 								strassen.get(existingIdx).setSpeed(sc.getSpeed());
 							}
 							else if(status == 3){
 								strassen.remove(existingIdx);	
 							}
+							repaint();
 						} catch (BoException e1) {
 							e1.printStackTrace();
 						}
@@ -134,7 +125,11 @@ public class PaintAction implements ActionListener{
 			e1.printStackTrace();
 		}
 
-		p.repaint();
+//		p.repaint();
+
+	}
+
+	private void repaint() {
 
 		frame.setVisible(false);
 		frame.pack();

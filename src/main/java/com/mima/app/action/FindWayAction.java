@@ -72,7 +72,6 @@ public class FindWayAction implements ActionListener {
 				else if(strHash != null) {
 					ort.setShortestWay(OrtDTO.SHORTESTWAY);
 					streetMap.put(strHash, strHash);
-					System.out.println(strHash);
 				}
 				else {
 					ort.setShortestWay(OrtDTO.DEFAULT);
@@ -80,7 +79,6 @@ public class FindWayAction implements ActionListener {
 			}
 			
 			for(StrasseComponentDTO sc : strassen) {
-				System.out.println(sc.hashCode());
 				if(streetMap.get(sc.hashCode()) != null) {
 					sc.setShortestWay(true);
 				}
