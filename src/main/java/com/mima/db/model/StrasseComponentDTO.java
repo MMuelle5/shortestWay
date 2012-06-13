@@ -95,15 +95,19 @@ public class StrasseComponentDTO {
 	public void incSpeed() {
 		if(speed == 50) {
 			speed = 80;
+			this.isMaut = false;
 		}
 		else if(speed == 80) {
 			speed = 120;
+			this.isMaut = true;
 		}
 		else if(speed == 120) {
 			speed = 0;
+			this.isMaut = false;
 		}
 		else {
 			speed =50;
+			this.isMaut = false;
 		}
 	}
 	

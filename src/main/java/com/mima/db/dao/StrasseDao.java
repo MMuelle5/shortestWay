@@ -13,7 +13,7 @@ import com.mima.db.model.StrasseDTO;
  */
 public interface StrasseDao {
 
-	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId) throws SQLException;
+	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId, boolean isMautAllowed) throws SQLException;
 
 	public List<StrasseComponentDTO> findAllStreetsToDisplay() throws SQLException;
 

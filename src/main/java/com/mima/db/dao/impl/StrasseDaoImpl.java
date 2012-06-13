@@ -39,14 +39,19 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 	}
 
 	@Override
-	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId) throws SQLException {
+	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId, boolean isMautAllowed) throws SQLException {
 		
 		List<StrasseDTO> retVal = new ArrayList<StrasseDTO>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         Connection connection = daoFactory.getConnection();
+        if(isMautAllowed) {
 		preparedStatement = DaoUtil.prepareStatement(connection, FINDSTREETBYSTARTPOINT, false, new Object[]{startPunktId});
+        }
+        else {
+        	preparedStatement = DaoUtil.prepareStatement(connection, FINDSTREETBYSTARTPOINT+" AND Toll=?", false, new Object[]{startPunktId, 0});
+        }
         resultSet = preparedStatement.executeQuery();
 
 		while(resultSet.next()) {
@@ -56,6 +61,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 			s.setDistanz(resultSet.getLong("Distance"));
 			s.setSpeed(resultSet.getInt("Speed"));
 			s.setMaut(resultSet.getBoolean("Toll"));
+			
 			retVal.add(s);
 		}
 		return retVal;
@@ -86,7 +92,6 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 			s.setSpeed(resultSet.getInt("Speed"));
 			s.setMaut(resultSet.getBoolean("Toll"));
 			map.put(s.hashCode(), s);
-//			retVal.add(s);
 		}
 		retVal.addAll(map.values());
 		return retVal;

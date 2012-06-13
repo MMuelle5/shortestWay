@@ -69,6 +69,11 @@ public class OrtsPunktBean{
 	public void setPointY(long pointY) {
 		this.pointY = pointY;
 	}
+	/**
+	 * Angelt sich rekursiv bis zum Startpunkt zurueck
+	 * und fuellt dann alle Punkte nacheinander in eine Liste ab
+	 * @return
+	 */
 	public List<OrtsPunktBean> getWay() {
 		List<OrtsPunktBean> opb = new ArrayList<OrtsPunktBean>();
 		opb.add(this);
@@ -80,6 +85,9 @@ public class OrtsPunktBean{
 		return opb;
 	}
 	
+	/**
+	 * @return Den Gesamten Streckenverlauf wird als String zurueck gegeben
+	 */
 	public String getHistory() {
 		String punkte = this.getPunkteBeschreibung();
 		if(prevPunkt != null) {

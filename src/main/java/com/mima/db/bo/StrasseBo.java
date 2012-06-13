@@ -17,10 +17,11 @@ public interface StrasseBo {
 	/**
 	 * 
 	 * @param startPunktId
+	 * @param isMautAllowed falls false --> gebuehrenpflichtige Strassen werden nicht beruecksichtig
 	 * @return rueckgabe aller Strassen, die von einem bestimmten Punkt ausgehen
 	 * @throws BoException
 	 */
-	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId) throws BoException;
+	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId, boolean isMautAllowed) throws BoException;
 	
 	/**
 	 * @return Alle Strassen inklusive deren Anzeigeoptionen

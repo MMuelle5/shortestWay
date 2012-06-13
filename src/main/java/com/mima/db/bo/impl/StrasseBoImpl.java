@@ -19,9 +19,9 @@ public class StrasseBoImpl implements StrasseBo {
 	}
 
 	@Override
-	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId) throws BoException {
+	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId, boolean isMautAllowed) throws BoException {
 		try {
-			return dao.findStreetsByStartPoint(startPunktId);
+			return dao.findStreetsByStartPoint(startPunktId, isMautAllowed);
 		} catch (SQLException e) {
 			throw new BoException(e);
 		}

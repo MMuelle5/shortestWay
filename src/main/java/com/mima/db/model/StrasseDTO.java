@@ -51,6 +51,7 @@ public class StrasseDTO implements Serializable {
 		this.startPunktId = dto.getEndPunktId();
 		this.endPunktId = dto.getStartPunktId();
 		this.speed = dto.getSpeed();
+		this.isMaut = dto.isMaut();
 		this.distanz = dto.getDistanz();
 	}
 	

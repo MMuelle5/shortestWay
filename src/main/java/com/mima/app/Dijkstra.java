@@ -26,6 +26,13 @@ public class Dijkstra {
 	private HashMap<Long, OrtsPunktBean> punkte = new HashMap<Long, OrtsPunktBean>();
 	private BerechnungsOptionen berechnung;
 	
+	/**
+	 * Initialisierung der Klasse
+	 * Inklusive uebergabe der Ziel Bo's (zur Vereinfachung der Tests/schnelles Umschalten auf eine neue DB
+	 * @param bo
+	 * @param pbo
+	 * @param berechnung
+	 */
 	public Dijkstra(StrasseBo bo, PointBo pbo, BerechnungsOptionen berechnung) {
 		super();
 		this.bo = bo;
@@ -33,6 +40,15 @@ public class Dijkstra {
 		this.berechnung = berechnung;
 	}
 
+	/**
+	 * Ausfuehren des Algorithmus, mit Kooridnatenuebergabe
+	 * @param startPunktX
+	 * @param startPunktY
+	 * @param endPunktX
+	 * @param endPunktY
+	 * @return
+	 * @throws Exception
+	 */
 	public OrtsPunktBean run(int startPunktX, int startPunktY, int endPunktX, int endPunktY) throws Exception {
 		OrtDTO start = pbo.findPointByAxis(startPunktX, startPunktY);
 		OrtDTO end = pbo.findPointByAxis(endPunktX, endPunktY);
@@ -41,12 +57,21 @@ public class Dijkstra {
 	}
 	
 	/**
-	 * 
-	 * Startpunkt gegeben aktPkt = Startpunkt while(aktPkt != endPkt)
-	 * alleVerbindungen holen akt pkt als "vorbei gekommen" markieren neu
-	 * erhaltene Pkte mit distanz abfüllen neue Pkt bereits abgefüllt? ja:
-	 * kleiner? ja: pkt als neuen aktPkt nehmen nein: kleinster pkt als aktPkt
-	 * nehmen nein: kleinster pkt als aktPkt nehmen
+	 * 1. a) Allen Punkte wird die Default-Distanz vergeben (sehr grosse Zahl)
+	 * 	  b) Startpunkt wird als aktuellen Punkt genommen&Distanz = 0 gesetzt
+	 *    c) Punkte werden in eine Map geschrieben (fuer den schnelleren Zugriff)
+	 *    
+	 * 2. Algorithmus:
+	 * 	 1.a)naechster Punkt mit der kuerzesten Distanz wird als aktuellen Punkt genommen
+	 *     b)kontrollierte Punkte werden aus der Map geloescht
+	 *   2.a)aktueller Punkt wird als kontrolliert gekennzeichnet
+	 *     b)aktueller Punkt = endPunkt --> Falls ja, kuerzester Weg gefunden
+	 *     c)falls der aktuelle Punkt die Default-Distanz noch immer gesetzt hat, wird ein
+	 *      	Fehler geworfen, da der gewuenschte Punkt nicht erreicht werden kann
+	 *   3.a)alle abgehenden Wege werden aus der Datenbank gelesen
+	 *     b)getNextShortestPkt wird aufgerufen
+	 *   4.  neuen kuerzester Weg wird gespeichert
+	 *   
 	 * @param startPunktId
 	 * @param endPunktId
 	 * @return
@@ -59,6 +84,7 @@ public class Dijkstra {
 
 		OrtsPunktBean pktBean;
 		OrtDTO str;
+
 		for(int i = allePunkte.size()-1; i >=0; i--) {
 			str = allePunkte.get(i);
 			pktBean = new OrtsPunktBean();
@@ -107,9 +133,7 @@ public class Dijkstra {
 				throw new Exception(); // Punkt wird nicht erreicht
 			}
 			aktPktBean.setKontrolliert(true);
-				
-			nextList = bo.findStreetsByStartPoint(aktPkt);
-
+			nextList = bo.findStreetsByStartPoint(aktPkt, berechnung.isMautAllowed());
 			aktPktBean = getNextShortestPkt(nextList, aktPktBean);
 
 			if(shortest.getStreckenInklGewichtung() > aktPktBean.getStreckenInklGewichtung() && (aktPkt == endPunktId || aktPkt.equals(endPunktId))) {
@@ -121,7 +145,14 @@ public class Dijkstra {
 	}
 
 	/**
-	 * Sucht den naechsten kuerzesten Pfad aus der nextList
+	 * Schreibt in alle "Punktenachbarn" von "aktPktBean" die Distanz,
+	 * sofern diese kleiner als die bereits gespeicherte Distanz ist
+	 * 
+	 * Verhalten:
+	 * 	-Punktenachbar bereits kontrolliert --> ignorieren
+	 * 	-Punktenachbar bereits von einem anderen Punkt erreicht, neue Distanz
+	 * 		ist aber kleiner als die Bestehende --> aktualisieren
+	 * 	-Punktenachbar wurde noch nie erreicht --> zusaetzliche Attribute abfuellen
 	 * @param nextList
 	 * @param aktPktBean
 	 * @return

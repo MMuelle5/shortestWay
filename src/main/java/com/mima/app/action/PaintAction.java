@@ -96,6 +96,7 @@ public class PaintAction implements ActionListener{
 							if(sdto.hashCode() == sc.hashCode()) {
 								sdto.incSpeed();
 								sc.setSpeed(sdto.getSpeed());
+								sc.setMaut(sdto.isMaut());
 								existingIdx = i;
 								break;
 							}
@@ -106,6 +107,7 @@ public class PaintAction implements ActionListener{
 							sDto.setStartPunktId(sc.getStartId());
 							sDto.setEndPunktId(sc.getEndId());
 							sDto.setSpeed(sc.getSpeed());
+							sDto.setMaut(sc.isMaut());
 							sDto.setDistanz(clacLength(sc.getyStart()-sc.getyEnd(), sc.getxStart()-sc.getxEnd()));
 							
 							int status = sbo.mergeOrDelStrasse(sDto);
@@ -115,6 +117,7 @@ public class PaintAction implements ActionListener{
 							}
 							else if(status == 2) {
 								strassen.get(existingIdx).setSpeed(sc.getSpeed());
+								strassen.get(existingIdx).setMaut(sc.isMaut());
 							}
 							else if(status == 3){
 								strassen.remove(existingIdx);	

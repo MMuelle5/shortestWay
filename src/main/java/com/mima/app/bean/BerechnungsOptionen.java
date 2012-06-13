@@ -8,7 +8,7 @@ import com.mima.db.model.StrasseDTO;
  * 2. Optionen:
  * 		- 0 = kuerzester Weg
  * 		- 1 = schnellster Weg
- * @author i10b@zhaw: M. MŸller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public class BerechnungsOptionen {
@@ -32,6 +32,13 @@ public class BerechnungsOptionen {
 		this.option = option;
 	}
 	
+	/**
+	 * Berechnet die "Distanz" anhand der gewaehlten Optionen
+	 * Einstellung wird nur die Distanz oder die Distanz und Geschwindigkeit beruecksichtig
+	 * @param aktDistInklGew
+	 * @param add
+	 * @return
+	 */
 	public double calcDistanzInklGew(double aktDistInklGew, StrasseDTO add) {
 		
 		double newDistanz = 0;
