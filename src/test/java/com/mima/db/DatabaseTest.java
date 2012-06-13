@@ -23,7 +23,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testStreetByStartPoint() throws SQLException {
-		dao.findStreetsByStartPoint(Long.valueOf(1));
+		dao.findStreetsByStartPoint(Long.valueOf(1), false);
 	}
 	
 	@Test
