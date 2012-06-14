@@ -123,6 +123,7 @@ public class Dijkstra {
 			}
 
 			aktPkt = aktPktBean.getPunkteId();
+
 			if(aktPkt != null) {
 				punkte.get(aktPkt).setKontrolliert(true);
 				if(aktPkt == endPunktId) {
@@ -174,7 +175,7 @@ public class Dijkstra {
 					nextPkt.setStreckenInklGewichtung(totalDistanz);
 					nextPkt.setDistanz(aktPktBean.getDistanz()+str.getDistanz());
 					nextPkt.setPrevPunkt(aktPktBean);
-			} else {
+			} else if(nextPkt.getStreckenInklGewichtung() == DEFAULTDISTANZ){
 				nextPkt.setStreckenInklGewichtung(totalDistanz);
 				nextPkt.setDistanz(aktPktBean.getDistanz()+str.getDistanz());
 				nextPkt.setPrevPunkt(aktPktBean);

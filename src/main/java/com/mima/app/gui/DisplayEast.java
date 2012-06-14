@@ -53,7 +53,7 @@ public class DisplayEast {
 		gc.gridx = 1;
 		gc.gridy = 2;
 		gc.weightx = 0.5;
-		bean.getNavi().add(new JLabel("Mit gebühren"), gc);
+		bean.getNavi().add(new JLabel("Mit Gebühren"), gc);
 
 		gc.gridx = 0;
 		gc.gridy = 3;

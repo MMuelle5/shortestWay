@@ -1,5 +1,6 @@
 package com.mima.app.action;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -92,6 +93,7 @@ public class FindWayAction implements ActionListener {
 
 				displayWayDescription(opb, ortsMap);
 			} catch (Exception e) {
+				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Die Punkte konnten nicht verbunden werden", "Error", JOptionPane.ERROR_MESSAGE);
 				frame.setVisible(false);
 				frame.pack();
@@ -175,6 +177,10 @@ public class FindWayAction implements ActionListener {
 		}
 		gc.gridy++;
 		f.add(center);
+		Dimension d = f.getPreferredSize();
+		int height  = (int) d.getHeight()+50;
+		int width  = (int) d.getWidth()+50;
+		f.setPreferredSize(new Dimension(width, height));
 		f.pack();
 		f.setVisible(true);
 		center.add(new JLabel("Sie haben "+opb.getPunkteBeschreibung()+" nach "+opb.getDistanz()+"km erreicht."), gc);
