@@ -56,7 +56,7 @@ public class GraphicalComponents extends JPanel {
 					pmenu.show(me.getComponent(), me.getX(), me.getY());
 					pb.setxAxis(me.getX());
 					pb.setyAxis(me.getY());
-
+ 
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e1) {
