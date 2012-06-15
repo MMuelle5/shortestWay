@@ -1,6 +1,7 @@
 package com.mima.db.bo;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mima.db.exception.BoException;
 import com.mima.db.model.StrasseComponentDTO;
@@ -38,4 +39,12 @@ public interface StrasseBo {
 	 */
 	public int mergeOrDelStrasse(StrasseDTO dto) throws BoException;
 	
+	/**
+	 * Wenn ein Punkt geloescht wird, muessen auch alle Verbindungen dort hin
+	 * geloescht werden.
+	 * @param pointid
+	 * @return Map von Strassen, die geloescht wurden
+	 * @throws BoException
+	 */
+	public Map<Integer, StrasseComponentDTO> deleteStreetsByPointId(Long pointid) throws BoException;
 }

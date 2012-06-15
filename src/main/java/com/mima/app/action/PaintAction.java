@@ -3,6 +3,7 @@ package com.mima.app.action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
@@ -20,7 +21,10 @@ import com.mima.db.model.StrasseDTO;
 
 /**
  * beinhaltet die Logik zum Zeichnen der Strassen/Punkte
- * 1. Punkte hinzufuegen (simpel)
+ * 1. Punkt hinzufuegen (simpel)
+ * 2. Punkt loeschen:
+ * 		-Alle Strassen, die den Punkt als Anfangs-/Endpunkt besitzt werden geloescht
+ * 		-Punkt wird gelosescht
  * 2. Strassen zeichnen:
  * 		-Anfang&Endpunkt der Linie ist ein Punkt? (wenn nein, nichts machen)
  * 		-Strasse bereits vorhanden? (wenn ja, bestehende bearbeiten; sonst neu)
@@ -57,6 +61,28 @@ public class PaintAction implements ActionListener{
 				e1.printStackTrace();
 			}
 			orte.add(dto);
+			repaint();
+		}
+		else if(e!=null && GraphicalUtils.DELETE.equals(e.getActionCommand()) && pb.getPointId() != null) {
+
+			for(OrtDTO ort : orte) {
+				if(ort.getPointId() == pb.getPointId()) {
+					try {
+						Map<Integer, StrasseComponentDTO> map = sbo.deleteStreetsByPointId(pb.getPointId());
+						for(int i = strassen.size()-1; i>=0; i--) {
+							if(map.get(strassen.get(i).hashCode()) != null) {
+								strassen.remove(i);
+							}
+						}
+						
+						pbo.deletePoint(ort);
+					} catch (BoException e1) {
+						e1.printStackTrace();
+					}
+					orte.remove(ort);
+					break;
+				}
+			}
 			repaint();
 		}
 		else {

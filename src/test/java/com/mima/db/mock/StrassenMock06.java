@@ -3,6 +3,7 @@ package com.mima.db.mock;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.mima.db.dao.PointDao;
 import com.mima.db.dao.StrasseDao;
@@ -245,6 +246,13 @@ public class StrassenMock06 implements StrasseDao, PointDao{
 
 	@Override
 	public Long findPointIdByName(String name) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<Integer, StrasseComponentDTO> deleteStreetsByPointId(Long pointId)
+			throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

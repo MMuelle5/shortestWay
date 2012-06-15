@@ -42,6 +42,17 @@ public class GraphicalComponents extends JPanel {
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent me) {
 				if (me.isPopupTrigger()) {
+					for(OrtDTO ort : orte) {
+						if(ort.getPointX()<me.getX() && (ort.getPointX()+75) > me.getX()
+							&& ort.getPointY()<me.getY() && (ort.getPointY()+75) > me.getY()) {
+							newPoint.setText(GraphicalUtils.DELETE);
+							pb.setPointId(ort.getPointId());
+							break;
+						}
+						else {
+							newPoint.setText(GraphicalUtils.NEWPOINT);
+						}
+					}
 					pmenu.show(me.getComponent(), me.getX(), me.getY());
 					pb.setxAxis(me.getX());
 					pb.setyAxis(me.getY());

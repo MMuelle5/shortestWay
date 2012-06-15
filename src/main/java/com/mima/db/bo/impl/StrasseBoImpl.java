@@ -2,6 +2,7 @@ package com.mima.db.bo.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.mima.db.bo.StrasseBo;
 import com.mima.db.dao.StrasseDao;
@@ -58,6 +59,16 @@ public class StrasseBoImpl implements StrasseBo {
 				dao.deleteStrasse(gegenRichtungDto);
 				return 3;
 			}
+		} catch (SQLException e) {
+			throw new BoException(e);
+		}
+	}
+
+	@Override
+	public Map<Integer, StrasseComponentDTO> deleteStreetsByPointId(Long pointId) throws BoException {
+		
+		try {
+			return dao.deleteStreetsByPointId(pointId);
 		} catch (SQLException e) {
 			throw new BoException(e);
 		}

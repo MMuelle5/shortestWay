@@ -12,7 +12,15 @@ public class PaintBean {
 	private int yAxis = 0;
 	private int xAxisEnd = 0;
 	private int yAxisEnd = 0;
+	private Long pointId;
 	
+	
+	public Long getPointId() {
+		return pointId;
+	}
+	public void setPointId(Long pointId) {
+		this.pointId = pointId;
+	}
 	public int getxAxis() {
 		return xAxis;
 	}

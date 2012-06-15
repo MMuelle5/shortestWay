@@ -27,6 +27,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 														" INNER JOIN shortestWay.WayPoint pEnd ON (pEnd.id = w.EndPoint)";
 	private static final String CREATESTREET = "INSERT INTO Way (StartPoint, EndPoint, Distance, Speed, Toll) values(?,?,?,?,?)";
 	private static final String DELETESTREET = "DELETE FROM Way WHERE StartPoint = ? AND EndPoint = ?";
+	private static final String DELETESTREETBYPOINT = "DELETE FROM Way WHERE StartPoint = ? OR EndPoint=?";
 	private static final String UPDATESTREET = " UPDATE Way " +
 											   " SET Speed = ?" +
 											   "    ,Toll = ?" +
@@ -41,30 +42,7 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 	@Override
 	public List<StrasseDTO> findStreetsByStartPoint(Long startPunktId, boolean isMautAllowed) throws SQLException {
 		
-		List<StrasseDTO> retVal = new ArrayList<StrasseDTO>();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        Connection connection = daoFactory.getConnection();
-        if(isMautAllowed) {
-		preparedStatement = DaoUtil.prepareStatement(connection, FINDSTREETBYSTARTPOINT, false, new Object[]{startPunktId});
-        }
-        else {
-        	preparedStatement = DaoUtil.prepareStatement(connection, FINDSTREETBYSTARTPOINT+" AND Toll=?", false, new Object[]{startPunktId, 0});
-        }
-        resultSet = preparedStatement.executeQuery();
-
-		while(resultSet.next()) {
-			StrasseDTO s = new StrasseDTO();
-			s.setStartPunktId(resultSet.getLong("StartPoint"));
-			s.setEndPunktId(resultSet.getLong("EndPoint"));
-			s.setDistanz(resultSet.getLong("Distance"));
-			s.setSpeed(resultSet.getInt("Speed"));
-			s.setMaut(resultSet.getBoolean("Toll"));
-			
-			retVal.add(s);
-		}
-		return retVal;
+		return findStreetsByPoint(startPunktId, isMautAllowed, FINDSTREETBYSTARTPOINT);
 	}
 
 	@Override
@@ -72,28 +50,8 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
 			throws SQLException {
 
 		List<StrasseComponentDTO> retVal = new ArrayList<StrasseComponentDTO>();
-        ResultSet resultSet = null;
 
-        Connection connection = daoFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ALLSTREETSTODISPLAY);
-		
-        resultSet = preparedStatement.executeQuery();
-
-        Map<Integer, StrasseComponentDTO> map = new HashMap<Integer, StrasseComponentDTO>();
-		while(resultSet.next()) {
-			StrasseComponentDTO s = new StrasseComponentDTO();
-			s.setStartId(resultSet.getLong("StartId"));
-			s.setEndId(resultSet.getLong("EndId"));
-			s.setxStart(resultSet.getInt("startX"));
-			s.setyStart(resultSet.getInt("startY"));
-			s.setxEnd(resultSet.getInt("endX"));
-			s.setyEnd(resultSet.getInt("endY"));
-			s.setDistanz(resultSet.getDouble("Distance"));
-			s.setSpeed(resultSet.getInt("Speed"));
-			s.setMaut(resultSet.getBoolean("Toll"));
-			map.put(s.hashCode(), s);
-		}
-		retVal.addAll(map.values());
+		retVal.addAll(findStreets(ALLSTREETSTODISPLAY, new Object[0]).values());
 		return retVal;
 	}
 
@@ -129,4 +87,67 @@ public class StrasseDaoImpl extends HibernateDaoHelper implements StrasseDao {
         preparedStatement.executeUpdate();
 	}
 
+	@Override
+	public Map<Integer, StrasseComponentDTO> deleteStreetsByPointId(Long pointId) throws SQLException {
+
+
+        Map<Integer, StrasseComponentDTO> deletedMap = findStreets(ALLSTREETSTODISPLAY + "WHERE Startpoint=? OR Endpoint=?", new Object[]{pointId, pointId});
+
+        Connection connection = daoFactory.getConnection();
+        PreparedStatement preparedStatement = DaoUtil.prepareStatement(connection, DELETESTREETBYPOINT, false, new Object[]{pointId, pointId});
+        preparedStatement.executeUpdate();
+        
+		return deletedMap;
+	}
+
+	private List<StrasseDTO> findStreetsByPoint(Long startPunktId, boolean isMautAllowed, String query) throws SQLException {
+		
+		List<StrasseDTO> retVal = new ArrayList<StrasseDTO>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        Connection connection = daoFactory.getConnection();
+        if(isMautAllowed) {
+		preparedStatement = DaoUtil.prepareStatement(connection, query, false, new Object[]{startPunktId});
+        }
+        else {
+        	preparedStatement = DaoUtil.prepareStatement(connection, query+" AND Toll=?", false, new Object[]{startPunktId, 0});
+        }
+        resultSet = preparedStatement.executeQuery();
+
+		while(resultSet.next()) {
+			StrasseDTO s = new StrasseDTO();
+			s.setStartPunktId(resultSet.getLong("StartPoint"));
+			s.setEndPunktId(resultSet.getLong("EndPoint"));
+			s.setDistanz(resultSet.getLong("Distance"));
+			s.setSpeed(resultSet.getInt("Speed"));
+			s.setMaut(resultSet.getBoolean("Toll"));
+			
+			retVal.add(s);
+		}
+		return retVal;
+	}
+	
+	private Map<Integer, StrasseComponentDTO> findStreets(String query, Object[] args) throws SQLException {
+
+        Connection connection = daoFactory.getConnection();
+        PreparedStatement preparedStatement = DaoUtil.prepareStatement(connection, query, false, args);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+		Map<Integer, StrasseComponentDTO> map = new HashMap<Integer, StrasseComponentDTO>();
+		while(resultSet.next()) {
+			StrasseComponentDTO s = new StrasseComponentDTO();
+			s.setStartId(resultSet.getLong("StartId"));
+			s.setEndId(resultSet.getLong("EndId"));
+			s.setxStart(resultSet.getInt("startX"));
+			s.setyStart(resultSet.getInt("startY"));
+			s.setxEnd(resultSet.getInt("endX"));
+			s.setyEnd(resultSet.getInt("endY"));
+			s.setDistanz(resultSet.getDouble("Distance"));
+			s.setSpeed(resultSet.getInt("Speed"));
+			s.setMaut(resultSet.getBoolean("Toll"));
+			map.put(s.hashCode(), s);
+		}
+		return map;
+	}
 }
