@@ -16,7 +16,7 @@ public class GraphicalUtils {
 
 	public static final int RAD = 35;
 	public static final String NEWPOINT = "Neuen Wegpunkt";
-	public static final String DELETE = "Wegpunkt löschen";
+	public static final String DELETE = "Wegpunkt loeschen";
 	
 	public static void drawLine(Graphics g, int xAxisStart, int yAxisStart,
 			int xAxisEnd, int yAxisEnd, int speed, boolean isShortestWay) {

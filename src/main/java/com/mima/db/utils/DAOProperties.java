@@ -11,7 +11,7 @@ import java.util.Properties;
  * welches sich im Root-Verzeichnis des Projekts befinden muss
  * @Deprecated
  *
- * @author i10b@zhaw: M. MŸller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public class DAOProperties {

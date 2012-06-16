@@ -13,7 +13,7 @@ import com.mima.db.model.StrasseDTO;
  */
 public class BerechnungsOptionen {
 
-	public static final String SHORTESTWAY="Kürzester Weg";
+	public static final String SHORTESTWAY="Kuerzester Weg";
 	public static final String FASTESTWAY="Schnellster Weg";
 	
 	private boolean isMautAllowed;

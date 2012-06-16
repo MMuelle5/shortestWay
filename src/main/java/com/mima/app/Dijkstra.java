@@ -14,7 +14,7 @@ import com.mima.db.model.StrasseDTO;
 /**
  * Dijkstra-Algorithmus
  *
- * @author i10b@zhaw: M. MŸller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public class Dijkstra {

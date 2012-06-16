@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 /**
  * Utility Klasse fuer DB-Calls
  *
- * @author i10b@zhaw: M. MŸller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public final class DaoUtil {

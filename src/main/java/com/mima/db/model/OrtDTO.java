@@ -1,10 +1,10 @@
 package com.mima.db.model;
 
 /**
- * Klasse für Knoten
+ * Klasse fuer Knoten
  * Bietet verschiedene Methoden um Punkt-Infos zu setzen/lesen
  *
- * @author i10b@zhaw: M. Müller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public class OrtDTO {

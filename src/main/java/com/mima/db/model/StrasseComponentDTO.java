@@ -2,9 +2,9 @@ package com.mima.db.model;
 
 
 /**
- * beinhaltet alle nštigen Methoden um Strecken und deren Eigenschaften zu setzen/lesen
+ * beinhaltet alle noetigen Methoden um Strecken und deren Eigenschaften zu setzen/lesen
  *
- * @author i10b@zhaw: M. MŸller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public class StrasseComponentDTO {

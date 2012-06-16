@@ -20,10 +20,10 @@ import com.mima.db.model.OrtDTO;
 import com.mima.db.model.StrasseComponentDTO;
 
 /**
- * Anzeigepanel für linke Hälfte vom GUI
- * zuständig für Wegpunkte und Strecke
+ * Anzeigepanel fuer linke Haelfte vom GUI
+ * zustaendig fuer Wegpunkte und Strecke
  *
- * @author i10b@zhaw: M. Müller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public class DisplayWay {

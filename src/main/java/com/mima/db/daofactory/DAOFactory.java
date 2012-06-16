@@ -13,7 +13,7 @@ import com.mima.db.dao.utility.DAOProperties;
 /**
  * Hier wird eine DB-Verbindung initiiert
  *
- * @author i10b@zhaw: M. MŸller / M. Ott
+ * @author i10b@zhaw: M. Mueller / M. Ott
  *
  */
 public abstract class DAOFactory {
